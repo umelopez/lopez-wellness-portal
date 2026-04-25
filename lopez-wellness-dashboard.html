@@ -7,286 +7,103 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap');
-
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   :root {
-    --sidebar-w: 260px;
-    --bg: #f5f5f4;
-    --surface: #ffffff;
-    --border: #e5e5e3;
-    --text: #1a1a18;
-    --muted: #6b6b67;
-    --accent: #2563eb;
-    --accent-light: #eff6ff;
-    --green: #16a34a;
-    --green-light: #dcfce7;
-    --red: #dc2626;
-    --red-light: #fee2e2;
-    --amber: #d97706;
-    --radius: 12px;
-    --radius-sm: 8px;
+    --sidebar-w: 260px; --bg: #f5f5f4; --surface: #ffffff; --border: #e5e5e3;
+    --text: #1a1a18; --muted: #6b6b67; --accent: #2563eb; --accent-light: #eff6ff;
+    --green: #16a34a; --green-light: #dcfce7; --red: #dc2626; --red-light: #fee2e2;
+    --amber: #d97706; --radius: 12px; --radius-sm: 8px;
   }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); display: flex; min-height: 100vh; font-size: 14px; }
 
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    display: flex;
-    min-height: 100vh;
-    font-size: 14px;
-  }
-
-  /* ── Sidebar ── */
-  .sidebar {
-    width: var(--sidebar-w);
-    background: var(--surface);
-    border-right: 1px solid var(--border);
-    display: flex;
-    flex-direction: column;
-    position: fixed;
-    top: 0; left: 0; bottom: 0;
-    z-index: 100;
-  }
-
-  .sidebar-brand {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 20px 18px;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .brand-icon {
-    width: 34px; height: 34px;
-    background: var(--accent);
-    border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-    color: #fff;
-    font-size: 16px;
-    flex-shrink: 0;
-  }
-
+  /* Sidebar */
+  .sidebar { width: var(--sidebar-w); background: var(--surface); border-right: 1px solid var(--border); display: flex; flex-direction: column; position: fixed; top: 0; left: 0; bottom: 0; z-index: 100; }
+  .sidebar-brand { display: flex; align-items: center; gap: 10px; padding: 20px 18px; border-bottom: 1px solid var(--border); }
+  .brand-icon { width: 34px; height: 34px; background: var(--accent); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #fff; flex-shrink: 0; }
   .brand-name { font-weight: 600; font-size: 13.5px; line-height: 1.25; }
   .brand-sub { font-size: 11.5px; color: var(--muted); }
-
   .sidebar-nav { flex: 1; overflow-y: auto; padding: 10px 0; }
-
-  .nav-item {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 9px 18px;
-    cursor: pointer;
-    color: var(--muted);
-    border-radius: 0;
-    transition: background 0.15s, color 0.15s;
-    user-select: none;
-    font-size: 13.5px;
-  }
-
+  .nav-item { display: flex; align-items: center; justify-content: space-between; padding: 9px 18px; cursor: pointer; color: var(--muted); transition: background .15s, color .15s; user-select: none; font-size: 13.5px; }
   .nav-item:hover { background: var(--bg); color: var(--text); }
   .nav-item.active { color: var(--accent); font-weight: 500; }
-
-  .nav-item .nav-left { display: flex; align-items: center; gap: 10px; }
-
-  .nav-icon { width: 16px; height: 16px; flex-shrink: 0; opacity: 0.7; }
+  .nav-left { display: flex; align-items: center; gap: 10px; }
+  .nav-icon { width: 16px; height: 16px; flex-shrink: 0; opacity: .7; }
   .nav-item.active .nav-icon { opacity: 1; }
-
-  .nav-chevron { width: 14px; height: 14px; transition: transform 0.2s; }
+  .nav-chevron { width: 14px; height: 14px; transition: transform .2s; }
   .nav-chevron.open { transform: rotate(180deg); }
-
   .nav-sub { padding-left: 44px; }
-  .nav-sub-item {
-    display: block;
-    padding: 7px 12px;
-    font-size: 13px;
-    color: var(--muted);
-    cursor: pointer;
-    border-radius: var(--radius-sm);
-    transition: background 0.15s, color 0.15s;
-    margin: 1px 0;
-  }
+  .nav-sub-item { display: block; padding: 7px 12px; font-size: 13px; color: var(--muted); cursor: pointer; border-radius: var(--radius-sm); transition: background .15s, color .15s; margin: 1px 0; }
   .nav-sub-item:hover { background: var(--bg); color: var(--text); }
-  .nav-sub-item.active {
-    background: var(--accent-light);
-    color: var(--accent);
-    font-weight: 500;
-  }
-
-  .sidebar-footer {
-    border-top: 1px solid var(--border);
-    padding: 14px 18px;
-  }
-
-  .user-row {
-    display: flex; align-items: center; gap: 10px;
-    cursor: pointer; padding: 6px 4px; border-radius: var(--radius-sm);
-    transition: background 0.15s;
-  }
+  .nav-sub-item.active { background: var(--accent-light); color: var(--accent); font-weight: 500; }
+  .sidebar-footer { border-top: 1px solid var(--border); padding: 14px 18px; }
+  .user-row { display: flex; align-items: center; gap: 10px; cursor: pointer; padding: 6px 4px; border-radius: var(--radius-sm); transition: background .15s; }
   .user-row:hover { background: var(--bg); }
-
-  .avatar {
-    width: 32px; height: 32px; border-radius: 50%;
-    background: var(--accent-light);
-    color: var(--accent);
-    font-weight: 600; font-size: 13px;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-  }
-
+  .avatar { width: 32px; height: 32px; border-radius: 50%; background: var(--accent-light); color: var(--accent); font-weight: 600; font-size: 13px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
   .user-name { font-weight: 500; font-size: 13px; }
   .user-email { font-size: 11.5px; color: var(--muted); }
-
-  .logout-btn {
-    display: flex; align-items: center; gap: 6px;
-    margin-top: 10px; padding: 6px 4px;
-    color: var(--red); font-size: 13px; font-weight: 500;
-    cursor: pointer; border-radius: var(--radius-sm);
-    transition: background 0.15s;
-    background: none; border: none; font-family: inherit;
-    width: 100%;
-  }
+  .logout-btn { display: flex; align-items: center; gap: 6px; margin-top: 10px; padding: 6px 4px; color: var(--red); font-size: 13px; font-weight: 500; cursor: pointer; border-radius: var(--radius-sm); background: none; border: none; font-family: inherit; width: 100%; transition: background .15s; }
   .logout-btn:hover { background: var(--red-light); }
 
-  /* ── Main ── */
-  .main {
-    margin-left: var(--sidebar-w);
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .topbar {
-    background: var(--surface);
-    border-bottom: 1px solid var(--border);
-    padding: 14px 32px;
-    display: flex; align-items: center; gap: 8px;
-    font-size: 13.5px; color: var(--muted);
-  }
+  /* Main */
+  .main { margin-left: var(--sidebar-w); flex: 1; display: flex; flex-direction: column; }
+  .topbar { background: var(--surface); border-bottom: 1px solid var(--border); padding: 14px 32px; display: flex; align-items: center; gap: 8px; font-size: 13.5px; color: var(--muted); }
   .topbar-sep { color: var(--border); }
   .topbar-current { color: var(--text); font-weight: 500; }
-
-  .topbar-sidebar-toggle {
-    background: none; border: none; cursor: pointer; padding: 4px; margin-right: 8px;
-    color: var(--muted); display: flex; align-items: center;
-  }
-
+  .topbar-sidebar-toggle { background: none; border: none; cursor: pointer; padding: 4px; margin-right: 8px; color: var(--muted); display: flex; align-items: center; }
   .content { padding: 32px; flex: 1; }
-
-  .page-header {
-    display: flex; align-items: flex-start; justify-content: space-between;
-    margin-bottom: 28px;
-  }
-
-  .page-title { font-size: 28px; font-weight: 600; letter-spacing: -0.5px; }
+  .page-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 28px; }
+  .page-title { font-size: 28px; font-weight: 600; letter-spacing: -.5px; }
   .page-subtitle { color: var(--muted); font-size: 13.5px; margin-top: 4px; }
-
   .header-actions { display: flex; gap: 10px; align-items: center; }
-
-  .btn {
-    display: flex; align-items: center; gap: 6px;
-    padding: 9px 16px; border-radius: var(--radius-sm);
-    font-family: inherit; font-size: 13.5px; font-weight: 500;
-    cursor: pointer; border: 1px solid var(--border);
-    background: var(--surface); color: var(--text);
-    transition: background 0.15s, border-color 0.15s;
-    white-space: nowrap;
-  }
+  .btn { display: flex; align-items: center; gap: 6px; padding: 9px 16px; border-radius: var(--radius-sm); font-family: inherit; font-size: 13.5px; font-weight: 500; cursor: pointer; border: 1px solid var(--border); background: var(--surface); color: var(--text); transition: background .15s; white-space: nowrap; }
   .btn:hover { background: var(--bg); }
-  .btn-primary {
-    background: var(--accent); color: #fff; border-color: var(--accent);
-  }
-  .btn-primary:hover { background: #1d4ed8; border-color: #1d4ed8; }
+  .btn-primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn-primary:hover { background: #1d4ed8; }
 
-  /* ── Metric Cards ── */
-  .metric-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
-    margin-bottom: 24px;
-  }
-
-  .metric-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 20px 22px 18px;
-  }
-
-  .metric-header {
-    display: flex; justify-content: space-between; align-items: flex-start;
-    margin-bottom: 14px;
-  }
-
-  .metric-label { font-size: 13px; color: var(--muted); font-weight: 400; }
-
-  .metric-icon {
-    width: 28px; height: 28px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 16px;
-  }
-
-  .metric-value {
-    font-size: 26px; font-weight: 600; letter-spacing: -0.5px;
-    margin-bottom: 6px;
-    font-family: 'DM Mono', monospace;
-  }
-
-  .metric-badge {
-    display: inline-flex; align-items: center; gap: 3px;
-    font-size: 12px; font-weight: 500;
-    padding: 2px 8px; border-radius: 20px;
-  }
+  /* Metric Cards */
+  .metric-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
+  .metric-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 22px 18px; }
+  .metric-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; }
+  .metric-label { font-size: 13px; color: var(--muted); }
+  .metric-icon { width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; }
+  .metric-value { font-size: 26px; font-weight: 600; letter-spacing: -.5px; margin-bottom: 6px; font-family: 'DM Mono', monospace; min-height: 36px; }
+  .metric-badge { display: inline-flex; align-items: center; gap: 3px; font-size: 12px; font-weight: 500; padding: 2px 8px; border-radius: 20px; }
   .badge-green { background: var(--green-light); color: var(--green); }
   .badge-red { background: var(--red-light); color: var(--red); }
   .badge-muted { background: var(--bg); color: var(--muted); }
 
-  /* ── Charts ── */
-  .chart-grid {
-    display: grid;
-    grid-template-columns: 1.4fr 1fr;
-    gap: 16px;
-  }
-
-  .chart-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 22px 24px;
-  }
-
+  /* Charts */
+  .chart-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 16px; }
+  .chart-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px 24px; }
   .chart-title { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
   .chart-subtitle { font-size: 12.5px; color: var(--muted); margin-bottom: 20px; }
 
-  .chart-wrap { position: relative; }
+  /* Loading */
+  .spinner { display: inline-block; width: 16px; height: 16px; border: 2px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin .7s linear infinite; vertical-align: middle; }
+  @keyframes spin { to { transform: rotate(360deg); } }
 
-  svg.icon { width: 18px; height: 18px; }
+  /* Error */
+  .error-banner { background: var(--red-light); color: var(--red); padding: 12px 18px; border-radius: var(--radius-sm); font-size: 13px; margin-bottom: 20px; display: none; }
+
+  /* Empty state */
+  .empty-chart { display: flex; align-items: center; justify-content: center; height: 100%; color: var(--muted); font-size: 13px; }
 </style>
 </head>
 <body>
 
-<!-- Sidebar -->
+<!-- ══ SIDEBAR ══ -->
 <aside class="sidebar">
   <div class="sidebar-brand">
     <div class="brand-icon">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="18" height="18">
-        <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
-        <polyline points="9 22 9 12 15 12 15 22"/>
-      </svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="18" height="18"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
     </div>
-    <div>
-      <div class="brand-name">Lopez Wellness Inc.</div>
-      <div class="brand-sub">Admin Console</div>
-    </div>
+    <div><div class="brand-name">Lopez Wellness Inc.</div><div class="brand-sub">Admin Console</div></div>
   </div>
 
   <nav class="sidebar-nav">
-    <!-- Dashboard -->
     <div class="nav-item active" onclick="toggleNav(this)">
       <div class="nav-left">
-        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
-          <rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
-        </svg>
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
         Dashboard
       </div>
       <svg class="nav-chevron open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
@@ -297,12 +114,9 @@
       <div class="nav-sub-item">Quick Actions</div>
     </div>
 
-    <!-- Branches -->
     <div class="nav-item" onclick="toggleNav(this)">
       <div class="nav-left">
-        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
-        </svg>
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
         Branches
       </div>
       <svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
@@ -312,146 +126,88 @@
       <div class="nav-sub-item">Daily Operations</div>
     </div>
 
-    <!-- Therapists -->
     <div class="nav-item" onclick="toggleNav(this)">
       <div class="nav-left">
-        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
-          <circle cx="9" cy="7" r="4"/>
-          <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
-        </svg>
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
         Therapists
       </div>
       <svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
     </div>
-    <div class="nav-sub" style="display:none">
-      <div class="nav-sub-item">All Therapists</div>
-      <div class="nav-sub-item">Schedules</div>
-    </div>
+    <div class="nav-sub" style="display:none"><div class="nav-sub-item">All Therapists</div><div class="nav-sub-item">Schedules</div></div>
 
-    <!-- Sales -->
     <div class="nav-item" onclick="toggleNav(this)">
       <div class="nav-left">
-        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <line x1="12" y1="1" x2="12" y2="23"/>
-          <path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>
-        </svg>
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
         Sales
       </div>
       <svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
     </div>
-    <div class="nav-sub" style="display:none">
-      <div class="nav-sub-item">Transactions</div>
-      <div class="nav-sub-item">Invoices</div>
-    </div>
+    <div class="nav-sub" style="display:none"><div class="nav-sub-item">Transactions</div><div class="nav-sub-item">Invoices</div></div>
 
-    <!-- Expenses -->
     <div class="nav-item" onclick="toggleNav(this)">
       <div class="nav-left">
-        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
-        </svg>
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
         Expenses
       </div>
       <svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
     </div>
-    <div class="nav-sub" style="display:none">
-      <div class="nav-sub-item">All Expenses</div>
-      <div class="nav-sub-item">Categories</div>
-    </div>
+    <div class="nav-sub" style="display:none"><div class="nav-sub-item">All Expenses</div><div class="nav-sub-item">Categories</div></div>
 
-    <!-- Payroll -->
     <div class="nav-item" onclick="toggleNav(this)">
       <div class="nav-left">
-        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <rect x="2" y="5" width="20" height="14" rx="2"/>
-          <line x1="2" y1="10" x2="22" y2="10"/>
-        </svg>
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
         Payroll
       </div>
       <svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
     </div>
-    <div class="nav-sub" style="display:none">
-      <div class="nav-sub-item">Payroll Runs</div>
-      <div class="nav-sub-item">Deductions</div>
-    </div>
+    <div class="nav-sub" style="display:none"><div class="nav-sub-item">Payroll Runs</div><div class="nav-sub-item">Deductions</div></div>
 
-    <!-- Reports -->
     <div class="nav-item" onclick="toggleNav(this)">
       <div class="nav-left">
-        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <line x1="18" y1="20" x2="18" y2="10"/>
-          <line x1="12" y1="20" x2="12" y2="4"/>
-          <line x1="6" y1="20" x2="6" y2="14"/>
-        </svg>
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
         Reports
       </div>
       <svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
     </div>
-    <div class="nav-sub" style="display:none">
-      <div class="nav-sub-item">Financial Reports</div>
-      <div class="nav-sub-item">Performance</div>
-    </div>
+    <div class="nav-sub" style="display:none"><div class="nav-sub-item">Financial Reports</div><div class="nav-sub-item">Performance</div></div>
 
-    <!-- Staff & Access -->
     <div class="nav-item" onclick="toggleNav(this)">
       <div class="nav-left">
-        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-        </svg>
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         Staff &amp; Access
       </div>
       <svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
     </div>
-    <div class="nav-sub" style="display:none">
-      <div class="nav-sub-item">Staff List</div>
-      <div class="nav-sub-item">Roles &amp; Permissions</div>
-    </div>
+    <div class="nav-sub" style="display:none"><div class="nav-sub-item">Staff List</div><div class="nav-sub-item">Roles &amp; Permissions</div></div>
 
-    <!-- Settings -->
     <div class="nav-item" onclick="toggleNav(this)">
       <div class="nav-left">
-        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="12" cy="12" r="3"/>
-          <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/>
-        </svg>
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
         Settings
       </div>
       <svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
     </div>
-    <div class="nav-sub" style="display:none">
-      <div class="nav-sub-item">General</div>
-      <div class="nav-sub-item">Integrations</div>
-    </div>
+    <div class="nav-sub" style="display:none"><div class="nav-sub-item">General</div><div class="nav-sub-item">Integrations</div></div>
   </nav>
 
   <div class="sidebar-footer">
     <div class="user-row">
       <div class="avatar">J</div>
-      <div>
-        <div class="user-name">Jerome</div>
-        <div class="user-email">jerome@lopezwellness.com</div>
-      </div>
+      <div><div class="user-name">Jerome</div><div class="user-email">jerome@lopezwellness.com</div></div>
       <svg style="margin-left:auto;width:14px;height:14px;color:var(--muted)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
     </div>
     <button class="logout-btn">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/>
-        <polyline points="16 17 21 12 16 7"/>
-        <line x1="21" y1="12" x2="9" y2="12"/>
-      </svg>
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
       Log out
     </button>
   </div>
 </aside>
 
-<!-- Main -->
+<!-- ══ MAIN ══ -->
 <main class="main">
   <div class="topbar">
     <button class="topbar-sidebar-toggle">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <rect x="3" y="3" width="7" height="18"/><line x1="14" y1="9" x2="21" y2="9"/><line x1="14" y1="15" x2="21" y2="15"/>
-      </svg>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="18"/><line x1="14" y1="9" x2="21" y2="9"/><line x1="14" y1="15" x2="21" y2="15"/></svg>
     </button>
     <span>Dashboard</span>
     <span class="topbar-sep">›</span>
@@ -459,24 +215,20 @@
   </div>
 
   <div class="content">
+    <div id="error-banner" class="error-banner"></div>
+
     <div class="page-header">
       <div>
         <h1 class="page-title">Dashboard</h1>
-        <p class="page-subtitle">Overview of company performance for Saturday, April 25, 2026.</p>
+        <p class="page-subtitle" id="today-label">Loading…</p>
       </div>
       <div class="header-actions">
         <button class="btn">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
-          </svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
           Last 7 Days
         </button>
         <button class="btn btn-primary">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
-            <polyline points="7 10 12 15 17 10"/>
-            <line x1="12" y1="15" x2="12" y2="3"/>
-          </svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
           Download Report
         </button>
       </div>
@@ -488,55 +240,44 @@
         <div class="metric-header">
           <span class="metric-label">Total Revenue</span>
           <div class="metric-icon" style="color:#16a34a">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <line x1="12" y1="1" x2="12" y2="23"/>
-              <path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>
-            </svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
           </div>
         </div>
-        <div class="metric-value">₱50,700</div>
-        <span class="metric-badge badge-green">↗ +12.5% from yesterday</span>
+        <div class="metric-value" id="total-revenue"><span class="spinner"></span></div>
+        <span class="metric-badge badge-green" id="revenue-badge"></span>
       </div>
 
       <div class="metric-card">
         <div class="metric-header">
           <span class="metric-label">Net Income</span>
           <div class="metric-icon" style="color:#2563eb">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/>
-            </svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
           </div>
         </div>
-        <div class="metric-value">₱38,700</div>
-        <span class="metric-badge badge-green">↗ +8.2% margin</span>
+        <div class="metric-value" id="net-income"><span class="spinner"></span></div>
+        <span class="metric-badge badge-green" id="income-badge"></span>
       </div>
 
       <div class="metric-card">
         <div class="metric-header">
           <span class="metric-label">Active Therapists</span>
           <div class="metric-icon" style="color:#d97706">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
-              <circle cx="9" cy="7" r="4"/>
-              <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
-            </svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
           </div>
         </div>
-        <div class="metric-value">40</div>
-        <span class="metric-badge badge-muted">Across 8 active branches</span>
+        <div class="metric-value" id="active-therapists"><span class="spinner"></span></div>
+        <span class="metric-badge badge-muted" id="therapist-badge"></span>
       </div>
 
       <div class="metric-card">
         <div class="metric-header">
           <span class="metric-label">Total Expenses</span>
           <div class="metric-icon" style="color:#dc2626">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
-            </svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
           </div>
         </div>
-        <div class="metric-value">₱12,000</div>
-        <span class="metric-badge badge-red">↗ +2.4% vs target</span>
+        <div class="metric-value" id="total-expenses"><span class="spinner"></span></div>
+        <span class="metric-badge badge-red" id="expense-badge"></span>
       </div>
     </div>
 
@@ -545,15 +286,14 @@
       <div class="chart-card">
         <div class="chart-title">Weekly Revenue Trend</div>
         <div class="chart-subtitle">Daily revenue performance over the last 7 days</div>
-        <div class="chart-wrap" style="height:260px">
+        <div style="height:260px; position:relative">
           <canvas id="revenueChart"></canvas>
         </div>
       </div>
-
       <div class="chart-card">
         <div class="chart-title">Branch Performance (Today)</div>
         <div class="chart-subtitle">Sales vs Expenses per location</div>
-        <div class="chart-wrap" style="height:260px">
+        <div style="height:260px; position:relative">
           <canvas id="branchChart"></canvas>
         </div>
       </div>
@@ -562,6 +302,138 @@
 </main>
 
 <script>
+  // ── Supabase Config ──────────────────────────────────────────
+  const SUPABASE_URL = 'https://bzizemhbfisbjrllyqfu.supabase.co';
+  const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ6aXplbWhiZmlzYmpybGx5cWZ1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAxNTA4NzksImV4cCI6MjA4NTcyNjg3OX0.6K7B5reuK2b9YJO0CqtJH_VB8GLUa9aKvlb4fboVB-s';
+
+  const HEADERS = {
+    'apikey': SUPABASE_KEY,
+    'Authorization': 'Bearer ' + SUPABASE_KEY,
+    'Content-Type': 'application/json'
+  };
+
+  async function dbQuery(table, params = '') {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/${table}${params}`, { headers: HEADERS });
+    if (!res.ok) throw new Error(`DB error on ${table}: ${res.status}`);
+    return res.json();
+  }
+
+  function fmt(n) {
+    return '₱' + Number(n || 0).toLocaleString('en-PH', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+  }
+
+  function showError(msg) {
+    const el = document.getElementById('error-banner');
+    el.textContent = '⚠ ' + msg;
+    el.style.display = 'block';
+  }
+
+  async function loadDashboard() {
+    const today = new Date();
+    document.getElementById('today-label').textContent =
+      'Overview of company performance for ' +
+      today.toLocaleDateString('en-US', { weekday:'long', year:'numeric', month:'long', day:'numeric' }) + '.';
+
+    const todayStr = today.toISOString().split('T')[0];
+
+    // Build last 7 days
+    const days = [];
+    for (let i = 6; i >= 0; i--) {
+      const d = new Date(today);
+      d.setDate(d.getDate() - i);
+      days.push(d.toISOString().split('T')[0]);
+    }
+    const weekStart = days[0];
+
+    try {
+      // Fetch all needed data in parallel
+      const [sales, expenses, therapists, branches] = await Promise.all([
+        dbQuery('sales', `?select=amount,transaction_at,branch_id&transaction_at=gte.${weekStart}T00:00:00`),
+        dbQuery('expenses', `?select=amount,expense_date,branch_id&expense_date=gte.${weekStart}`),
+        dbQuery('therapists', `?select=id,status,branch_id`),
+        dbQuery('branches', `?select=id,name,status`)
+      ]);
+
+      // ── Today's figures ──
+      const todaySales     = sales.filter(s => s.transaction_at?.startsWith(todayStr));
+      const todayExpenses  = expenses.filter(e => e.expense_date === todayStr);
+      const totalRevenue   = todaySales.reduce((s, r) => s + Number(r.amount), 0);
+      const totalExpenses  = todayExpenses.reduce((s, r) => s + Number(r.amount), 0);
+      const netIncome      = totalRevenue - totalExpenses;
+      const activeTherapists = therapists.filter(t => t.status === 'active');
+      const activeBranches   = branches.filter(b => b.status === 'open');
+
+      // ── Metric cards ──
+      document.getElementById('total-revenue').textContent     = fmt(totalRevenue);
+      document.getElementById('net-income').textContent        = fmt(netIncome);
+      document.getElementById('active-therapists').textContent = activeTherapists.length || '0';
+      document.getElementById('total-expenses').textContent    = fmt(totalExpenses);
+
+      document.getElementById('revenue-badge').textContent    = todaySales.length + ' transactions today';
+      document.getElementById('income-badge').textContent     = totalRevenue > 0 ? ((netIncome / totalRevenue * 100).toFixed(1) + '% margin') : '—';
+      document.getElementById('therapist-badge').textContent  = 'Across ' + activeBranches.length + ' active branches';
+      document.getElementById('expense-badge').textContent    = todayExpenses.length + ' items logged today';
+
+      // ── Weekly Revenue Chart ──
+      const dayLabels    = days.map(d => new Date(d).toLocaleDateString('en-US', { weekday: 'short' }));
+      const dailyRevenue = days.map(day =>
+        sales.filter(s => s.transaction_at?.startsWith(day)).reduce((s, r) => s + Number(r.amount), 0)
+      );
+
+      new Chart(document.getElementById('revenueChart'), {
+        type: 'line',
+        data: {
+          labels: dayLabels,
+          datasets: [{
+            data: dailyRevenue,
+            borderColor: '#2563eb', backgroundColor: 'rgba(37,99,235,0.08)',
+            borderWidth: 2, tension: 0.45, fill: true,
+            pointRadius: 3, pointBackgroundColor: '#2563eb', pointBorderColor: '#fff', pointBorderWidth: 2
+          }]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: { legend: { display: false } },
+          scales: {
+            x: { grid: { display: false }, ticks: { font: { family: 'DM Sans', size: 12 }, color: '#6b6b67' } },
+            y: { grid: { color: 'rgba(0,0,0,0.05)' }, ticks: { font: { family: 'DM Sans', size: 12 }, color: '#6b6b67', callback: v => '₱' + (v/1000).toFixed(0) + 'k' } }
+          }
+        }
+      });
+
+      // ── Branch Performance Chart ──
+      const branchLabels   = branches.map(b => b.name);
+      const branchRevenue  = branches.map(b => todaySales.filter(s => s.branch_id === b.id).reduce((s, r) => s + Number(r.amount), 0));
+      const branchExpenses = branches.map(b => todayExpenses.filter(e => e.branch_id === b.id).reduce((s, r) => s + Number(r.amount), 0));
+
+      new Chart(document.getElementById('branchChart'), {
+        type: 'bar',
+        data: {
+          labels: branchLabels,
+          datasets: [
+            { label: 'Sales',    data: branchRevenue,  backgroundColor: '#16a34a', borderRadius: 3 },
+            { label: 'Expenses', data: branchExpenses, backgroundColor: '#dc2626', borderRadius: 3 }
+          ]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          indexAxis: 'y',
+          plugins: { legend: { position: 'bottom', labels: { font: { family: 'DM Sans', size: 12 }, color: '#6b6b67', boxWidth: 12, padding: 16 } } },
+          scales: {
+            x: { grid: { color: 'rgba(0,0,0,0.05)' }, ticks: { font: { family: 'DM Sans', size: 11 }, color: '#6b6b67', callback: v => '₱'+(v/1000).toFixed(0)+'k' } },
+            y: { grid: { display: false }, ticks: { font: { family: 'DM Sans', size: 11 }, color: '#6b6b67' } }
+          }
+        }
+      });
+
+    } catch (err) {
+      showError('Could not load data from Supabase. ' + err.message);
+      ['total-revenue','net-income','active-therapists','total-expenses'].forEach(id => {
+        document.getElementById(id).textContent = '—';
+      });
+    }
+  }
+
   function toggleNav(el) {
     const sub = el.nextElementSibling;
     const chevron = el.querySelector('.nav-chevron');
@@ -570,64 +442,7 @@
     if (chevron) chevron.classList.toggle('open', !isOpen);
   }
 
-  const revenueCtx = document.getElementById('revenueChart').getContext('2d');
-  new Chart(revenueCtx, {
-    type: 'line',
-    data: {
-      labels: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-      datasets: [{
-        label: 'Revenue',
-        data: [48000, 52000, 49500, 51000, 55000, 78000, 72000],
-        borderColor: '#2563eb',
-        backgroundColor: 'rgba(37,99,235,0.08)',
-        borderWidth: 2,
-        tension: 0.45,
-        fill: true,
-        pointRadius: 3,
-        pointBackgroundColor: '#2563eb',
-        pointBorderColor: '#fff',
-        pointBorderWidth: 2,
-      }]
-    },
-    options: {
-      responsive: true, maintainAspectRatio: false,
-      plugins: { legend: { display: false } },
-      scales: {
-        x: { grid: { display: false }, ticks: { font: { family: 'DM Sans', size: 12 }, color: '#6b6b67' } },
-        y: {
-          grid: { color: 'rgba(0,0,0,0.05)', drawBorder: false },
-          ticks: {
-            font: { family: 'DM Sans', size: 12 }, color: '#6b6b67',
-            callback: v => '₱' + (v/1000).toFixed(0) + 'k'
-          }
-        }
-      }
-    }
-  });
-
-  const branches = ['Butuan', 'Butuan 2', 'Ayala Centrio', 'Patria de Cebu', 'Limketkai Mall', 'City Legazpi', 'GMALL Tagum', 'City Puerto'];
-  const branchCtx = document.getElementById('branchChart').getContext('2d');
-  new Chart(branchCtx, {
-    type: 'bar',
-    data: {
-      labels: branches,
-      datasets: [
-        { label: 'Sales', data: [18000, 15000, 20000, 8000, 12000, 9000, 11000, 7000], backgroundColor: '#16a34a', borderRadius: 3 },
-        { label: 'Expenses', data: [3200, 2800, 4100, 1500, 2200, 1800, 2000, 1200], backgroundColor: '#dc2626', borderRadius: 3 }
-      ]
-    },
-    options: {
-      responsive: true, maintainAspectRatio: false,
-      indexAxis: 'y',
-      plugins: {
-        legend: { position: 'bottom', labels: { font: { family: 'DM Sans', size: 12 }, color: '#6b6b67', boxWidth: 12, padding: 16 } }
-      },
-      scales: {
-        x: { grid: { color: 'rgba(0,0,0,0.05)' }, ticks: { font: { family: 'DM Sans', size: 11 }, color: '#6b6b67', callback: v => '₱'+(v/1000).toFixed(0)+'k' } },
-        y: { grid: { display: false }, ticks: { font: { family: 'DM Sans', size: 11 }, color: '#6b6b67' } }
-      }
-    }
-  });
+  loadDashboard();
 </script>
 </body>
 </html>

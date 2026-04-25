@@ -9,26 +9,14 @@
   @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap');
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
-    --sidebar-w: 260px;
-    --bg: #f5f5f4;
-    --surface: #ffffff;
-    --border: #e5e5e3;
-    --text: #1a1a18;
-    --muted: #6b6b67;
-    --accent: #2563eb;
-    --accent-light: #eff6ff;
-    --green: #16a34a;
-    --green-light: #dcfce7;
-    --red: #dc2626;
-    --red-light: #fee2e2;
-    --amber: #d97706;
-    --amber-light: #fef3c7;
-    --radius: 12px;
-    --radius-sm: 8px;
+    --sidebar-w: 260px; --bg: #f5f5f4; --surface: #ffffff; --border: #e5e5e3;
+    --text: #1a1a18; --muted: #6b6b67; --accent: #2563eb; --accent-light: #eff6ff;
+    --green: #16a34a; --green-light: #dcfce7; --red: #dc2626; --red-light: #fee2e2;
+    --amber: #d97706; --amber-light: #fef3c7; --radius: 12px; --radius-sm: 8px;
   }
   body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); display: flex; min-height: 100vh; font-size: 14px; }
 
-  /* ── Sidebar ── */
+  /* Sidebar */
   .sidebar { width: var(--sidebar-w); background: var(--surface); border-right: 1px solid var(--border); display: flex; flex-direction: column; position: fixed; top: 0; left: 0; bottom: 0; z-index: 100; }
   .sidebar-brand { display: flex; align-items: center; gap: 10px; padding: 20px 18px; border-bottom: 1px solid var(--border); }
   .brand-icon { width: 34px; height: 34px; background: var(--accent); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #fff; flex-shrink: 0; }
@@ -60,7 +48,7 @@
   .logout-btn { display: flex; align-items: center; gap: 6px; margin-top: 10px; padding: 6px 4px; color: var(--red); font-size: 13px; font-weight: 500; cursor: pointer; border-radius: var(--radius-sm); background: none; border: none; font-family: inherit; width: 100%; transition: background .15s; }
   .logout-btn:hover { background: var(--red-light); }
 
-  /* ── Main ── */
+  /* Main */
   .main { margin-left: var(--sidebar-w); flex: 1; display: flex; flex-direction: column; }
   .topbar { background: var(--surface); border-bottom: 1px solid var(--border); padding: 14px 32px; display: flex; align-items: center; gap: 8px; font-size: 13.5px; color: var(--muted); }
   .topbar-sep { color: var(--border); }
@@ -68,21 +56,19 @@
   .content { padding: 32px; flex: 1; }
   .page { display: none; }
   .page.active { display: block; }
-
-  /* ── Page Header ── */
   .page-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 28px; }
   .page-title { font-size: 26px; font-weight: 600; letter-spacing: -.5px; }
   .page-subtitle { color: var(--muted); font-size: 13.5px; margin-top: 4px; }
   .header-actions { display: flex; gap: 10px; align-items: center; }
 
-  /* ── Buttons ── */
+  /* Buttons */
   .btn { display: inline-flex; align-items: center; gap: 6px; padding: 9px 16px; border-radius: var(--radius-sm); font-family: inherit; font-size: 13.5px; font-weight: 500; cursor: pointer; border: 1px solid var(--border); background: var(--surface); color: var(--text); transition: background .15s; white-space: nowrap; }
   .btn:hover { background: var(--bg); }
   .btn-primary { background: var(--accent); color: #fff; border-color: var(--accent); }
-  .btn-primary:hover { background: #1d4ed8; border-color: #1d4ed8; }
+  .btn-primary:hover { background: #1d4ed8; }
   .btn-sm { padding: 6px 12px; font-size: 12.5px; }
 
-  /* ── Badges ── */
+  /* Badges */
   .badge { display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 20px; font-size: 12px; font-weight: 500; }
   .badge-green { background: var(--green-light); color: var(--green); }
   .badge-red { background: var(--red-light); color: var(--red); }
@@ -90,13 +76,13 @@
   .badge-blue { background: var(--accent-light); color: var(--accent); }
   .badge-muted { background: var(--bg); color: var(--muted); border: 1px solid var(--border); }
 
-  /* ── Table ── */
-  .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+  /* Cards & Tables */
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin-bottom: 24px; }
   .card-header { padding: 18px 22px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 12px; }
   .card-title { font-size: 14px; font-weight: 600; }
-  .search-input { display: flex; align-items: center; gap: 8px; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 7px 12px; font-family: inherit; font-size: 13px; color: var(--text); width: 220px; }
-  .search-input input { background: none; border: none; outline: none; font-family: inherit; font-size: 13px; color: var(--text); width: 100%; }
-  .search-input input::placeholder { color: var(--muted); }
+  .search-box { display: flex; align-items: center; gap: 8px; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 7px 12px; width: 220px; }
+  .search-box input { background: none; border: none; outline: none; font-family: inherit; font-size: 13px; color: var(--text); width: 100%; }
+  .search-box input::placeholder { color: var(--muted); }
   table { width: 100%; border-collapse: collapse; }
   thead th { text-align: left; padding: 11px 22px; font-size: 12px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; background: var(--bg); border-bottom: 1px solid var(--border); }
   tbody tr { border-bottom: 1px solid var(--border); transition: background .12s; }
@@ -104,44 +90,25 @@
   tbody tr:hover { background: #fafaf9; }
   tbody td { padding: 14px 22px; font-size: 13.5px; vertical-align: middle; }
 
-  /* ── Metric Cards ── */
+  /* Metric cards */
   .metric-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
-  .metric-grid-3 { grid-template-columns: repeat(3, 1fr); }
   .metric-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 22px 18px; }
   .metric-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
   .metric-label { font-size: 12.5px; color: var(--muted); }
-  .metric-icon { width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; }
-  .metric-value { font-size: 24px; font-weight: 600; letter-spacing: -.5px; font-family: 'DM Mono', monospace; margin-bottom: 6px; }
+  .metric-value { font-size: 24px; font-weight: 600; letter-spacing: -.5px; font-family: 'DM Mono', monospace; margin-bottom: 6px; min-height: 32px; }
   .metric-sub { font-size: 12px; color: var(--muted); }
 
-  /* ── Charts ── */
+  /* Charts */
   .chart-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 24px; }
   .chart-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px 24px; }
   .chart-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
   .chart-subtitle { font-size: 12.5px; color: var(--muted); margin-bottom: 18px; }
 
-  /* ── Filter Bar ── */
+  /* Filter */
   .filter-bar { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; align-items: center; }
   .filter-select { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 8px 12px; font-family: inherit; font-size: 13px; color: var(--text); cursor: pointer; }
-  .filter-select:focus { outline: none; border-color: var(--accent); }
 
-  /* ── Avatar Stack ── */
-  .branch-avatar { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 12px; flex-shrink: 0; }
-
-  /* ── Activity Log ── */
-  .activity-list { display: flex; flex-direction: column; }
-  .activity-item { display: flex; gap: 14px; padding: 14px 22px; border-bottom: 1px solid var(--border); }
-  .activity-item:last-child { border-bottom: none; }
-  .activity-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-top: 6px; }
-  .activity-dot-green { background: var(--green); }
-  .activity-dot-blue { background: var(--accent); }
-  .activity-dot-amber { background: var(--amber); }
-  .activity-dot-red { background: var(--red); }
-  .activity-time { font-size: 11.5px; color: var(--muted); white-space: nowrap; margin-top: 2px; }
-  .activity-text { font-size: 13.5px; line-height: 1.5; }
-  .activity-branch { font-size: 12px; color: var(--muted); margin-top: 2px; }
-
-  /* ── Monitoring Grid ── */
+  /* Monitor */
   .monitor-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
   .monitor-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; }
   .monitor-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
@@ -150,19 +117,28 @@
   .monitor-row:last-child { border-bottom: none; }
   .monitor-label { color: var(--muted); }
   .monitor-val { font-weight: 500; font-family: 'DM Mono', monospace; font-size: 13px; }
-
-  /* ── Progress bar ── */
-  .progress-bar { height: 6px; background: var(--border); border-radius: 10px; overflow: hidden; margin-top: 6px; }
+  .progress-bar { height: 6px; background: var(--border); border-radius: 10px; overflow: hidden; margin-top: 10px; }
   .progress-fill { height: 100%; border-radius: 10px; }
 
-  /* ── Tabs ── */
-  .tabs { display: flex; gap: 2px; border-bottom: 1px solid var(--border); margin-bottom: 22px; }
-  .tab { padding: 9px 18px; font-size: 13.5px; font-weight: 500; color: var(--muted); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; transition: color .15s, border-color .15s; }
-  .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
-  .tab:hover { color: var(--text); }
+  /* Activity */
+  .activity-list { display: flex; flex-direction: column; }
+  .activity-item { display: flex; gap: 14px; padding: 14px 22px; border-bottom: 1px solid var(--border); }
+  .activity-item:last-child { border-bottom: none; }
+  .activity-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
+  .dot-green { background: var(--green); }
+  .dot-blue { background: var(--accent); }
+  .dot-amber { background: var(--amber); }
+  .dot-red { background: var(--red); }
+  .activity-time { font-size: 11.5px; color: var(--muted); white-space: nowrap; margin-top: 2px; }
+  .activity-text { font-size: 13.5px; line-height: 1.5; }
+  .activity-branch { font-size: 12px; color: var(--muted); margin-top: 2px; }
 
-  /* ── Empty ── */
-  .empty { text-align: center; padding: 60px 20px; color: var(--muted); font-size: 13.5px; }
+  /* Loading / Error */
+  .spinner { display: inline-block; width: 14px; height: 14px; border: 2px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin .7s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .loading-row td { text-align: center; color: var(--muted); padding: 30px !important; }
+  .error-banner { background: var(--red-light); color: var(--red); padding: 12px 18px; border-radius: var(--radius-sm); font-size: 13px; margin-bottom: 20px; display: none; }
+  .branch-initials { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 12px; flex-shrink: 0; background: var(--accent-light); color: var(--accent); }
 </style>
 </head>
 <body>
@@ -173,117 +149,56 @@
     <div class="brand-icon">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="18" height="18"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
     </div>
-    <div>
-      <div class="brand-name">Lopez Wellness Inc.</div>
-      <div class="brand-sub">Admin Console</div>
-    </div>
+    <div><div class="brand-name">Lopez Wellness Inc.</div><div class="brand-sub">Admin Console</div></div>
   </div>
-
   <nav class="sidebar-nav">
-    <!-- Dashboard -->
     <div class="nav-item" onclick="toggleNav(this)">
-      <div class="nav-left">
-        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-        Dashboard
-      </div>
+      <div class="nav-left"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>Dashboard</div>
       <svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
     </div>
-    <div class="nav-sub" style="display:none">
-      <div class="nav-sub-item">Dashboard</div>
-      <div class="nav-sub-item">Today's Summary</div>
-      <div class="nav-sub-item">Quick Actions</div>
-    </div>
+    <div class="nav-sub" style="display:none"><div class="nav-sub-item">Dashboard</div><div class="nav-sub-item">Today's Summary</div></div>
 
-    <!-- Branches -->
     <div class="nav-item active" onclick="toggleNav(this)">
-      <div class="nav-left">
-        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
-        Branches
-      </div>
+      <div class="nav-left"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>Branches</div>
       <svg class="nav-chevron open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
     </div>
     <div class="nav-sub">
-      <div class="nav-sub-item active" id="nav-branch-list" onclick="showPage('branch-list', this)">Branch List</div>
-      <!-- Daily Operations with nested sub -->
-      <div class="nav-sub-item" id="nav-daily-ops" onclick="toggleDailyOps(this)" style="display:flex;justify-content:space-between;align-items:center;">
+      <div class="nav-sub-item active" onclick="showPage('branch-list',this)">Branch List</div>
+      <div class="nav-sub-item" onclick="toggleDailyOps(this)" style="display:flex;justify-content:space-between;align-items:center;">
         <span>Daily Operations</span>
         <svg id="ops-chevron" class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
       </div>
       <div class="nav-sub-sub" id="daily-ops-sub" style="display:none">
-        <div class="nav-sub-sub-item" onclick="showPage('daily-commissions', this)">Daily Commissions</div>
-        <div class="nav-sub-sub-item" onclick="showPage('daily-sales', this)">Daily Sales</div>
-        <div class="nav-sub-sub-item" onclick="showPage('daily-expenses', this)">Daily Expenses</div>
-        <div class="nav-sub-sub-item" onclick="showPage('monitoring', this)">Monitoring</div>
-        <div class="nav-sub-sub-item" onclick="showPage('branch-performance', this)">Branch Performance</div>
-        <div class="nav-sub-sub-item" onclick="showPage('activity-log', this)">Branch Activity Log</div>
+        <div class="nav-sub-sub-item" onclick="showPage('daily-commissions',this)">Daily Commissions</div>
+        <div class="nav-sub-sub-item" onclick="showPage('daily-sales',this)">Daily Sales</div>
+        <div class="nav-sub-sub-item" onclick="showPage('daily-expenses',this)">Daily Expenses</div>
+        <div class="nav-sub-sub-item" onclick="showPage('monitoring',this)">Monitoring</div>
+        <div class="nav-sub-sub-item" onclick="showPage('branch-performance',this)">Branch Performance</div>
+        <div class="nav-sub-sub-item" onclick="showPage('activity-log',this)">Branch Activity Log</div>
       </div>
     </div>
 
-    <!-- Other nav items -->
-    <div class="nav-item" onclick="toggleNav(this)">
-      <div class="nav-left">
-        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
-        Therapists
-      </div>
-      <svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-    </div>
-    <div class="nav-sub" style="display:none"><div class="nav-sub-item">All Therapists</div><div class="nav-sub-item">Schedules</div></div>
+    <div class="nav-item" onclick="toggleNav(this)"><div class="nav-left"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Therapists</div><svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+    <div class="nav-sub" style="display:none"><div class="nav-sub-item">All Therapists</div></div>
 
-    <div class="nav-item" onclick="toggleNav(this)">
-      <div class="nav-left">
-        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
-        Sales
-      </div>
-      <svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-    </div>
-    <div class="nav-sub" style="display:none"><div class="nav-sub-item">Transactions</div><div class="nav-sub-item">Invoices</div></div>
+    <div class="nav-item" onclick="toggleNav(this)"><div class="nav-left"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>Sales</div><svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+    <div class="nav-sub" style="display:none"><div class="nav-sub-item">Transactions</div></div>
 
-    <div class="nav-item" onclick="toggleNav(this)">
-      <div class="nav-left">
-        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-        Expenses
-      </div>
-      <svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-    </div>
-    <div class="nav-sub" style="display:none"><div class="nav-sub-item">All Expenses</div><div class="nav-sub-item">Categories</div></div>
+    <div class="nav-item" onclick="toggleNav(this)"><div class="nav-left"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Expenses</div><svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+    <div class="nav-sub" style="display:none"><div class="nav-sub-item">All Expenses</div></div>
 
-    <div class="nav-item" onclick="toggleNav(this)">
-      <div class="nav-left">
-        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
-        Payroll
-      </div>
-      <svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-    </div>
-    <div class="nav-sub" style="display:none"><div class="nav-sub-item">Payroll Runs</div><div class="nav-sub-item">Deductions</div></div>
+    <div class="nav-item" onclick="toggleNav(this)"><div class="nav-left"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>Payroll</div><svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+    <div class="nav-sub" style="display:none"><div class="nav-sub-item">Payroll Runs</div></div>
 
-    <div class="nav-item" onclick="toggleNav(this)">
-      <div class="nav-left">
-        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-        Reports
-      </div>
-      <svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-    </div>
-    <div class="nav-sub" style="display:none"><div class="nav-sub-item">Financial Reports</div><div class="nav-sub-item">Performance</div></div>
+    <div class="nav-item" onclick="toggleNav(this)"><div class="nav-left"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Reports</div><svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+    <div class="nav-sub" style="display:none"><div class="nav-sub-item">Financial Reports</div></div>
 
-    <div class="nav-item" onclick="toggleNav(this)">
-      <div class="nav-left">
-        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        Staff &amp; Access
-      </div>
-      <svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-    </div>
-    <div class="nav-sub" style="display:none"><div class="nav-sub-item">Staff List</div><div class="nav-sub-item">Roles &amp; Permissions</div></div>
+    <div class="nav-item" onclick="toggleNav(this)"><div class="nav-left"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Staff &amp; Access</div><svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+    <div class="nav-sub" style="display:none"><div class="nav-sub-item">Staff List</div></div>
 
-    <div class="nav-item" onclick="toggleNav(this)">
-      <div class="nav-left">
-        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
-        Settings
-      </div>
-      <svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-    </div>
-    <div class="nav-sub" style="display:none"><div class="nav-sub-item">General</div><div class="nav-sub-item">Integrations</div></div>
+    <div class="nav-item" onclick="toggleNav(this)"><div class="nav-left"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>Settings</div><svg class="nav-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div>
+    <div class="nav-sub" style="display:none"><div class="nav-sub-item">General</div></div>
   </nav>
-
   <div class="sidebar-footer">
     <div class="user-row">
       <div class="avatar">J</div>
@@ -299,675 +214,661 @@
 
 <!-- ══ MAIN ══ -->
 <main class="main">
-  <div class="topbar" id="topbar">
+  <div class="topbar">
     <span>Branches</span>
     <span class="topbar-sep">›</span>
     <span class="topbar-current" id="topbar-label">Branch List</span>
   </div>
 
   <div class="content">
+    <div id="error-banner" class="error-banner"></div>
 
-    <!-- ══════════════════════════════════════
-         PAGE 1 — BRANCH LIST
-    ══════════════════════════════════════ -->
+    <!-- PAGE: BRANCH LIST -->
     <div class="page active" id="page-branch-list">
       <div class="page-header">
-        <div>
-          <h1 class="page-title">Branch List</h1>
-          <p class="page-subtitle">All Lopez Wellness locations and their current status.</p>
-        </div>
+        <div><h1 class="page-title">Branch List</h1><p class="page-subtitle">All Lopez Wellness locations and their current status.</p></div>
         <div class="header-actions">
-          <button class="btn">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="14" y2="18"/></svg>
-            Filter
-          </button>
-          <button class="btn btn-primary">
+          <button class="btn btn-primary" onclick="openAddBranch()">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
             Add Branch
           </button>
         </div>
       </div>
-
       <div class="card">
         <div class="card-header">
-          <span class="card-title">8 Branches</span>
-          <div class="search-input">
+          <span class="card-title" id="branch-count">Branches</span>
+          <div class="search-box">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-            <input type="text" placeholder="Search branches…" oninput="filterTable(this,'branch-table')">
+            <input type="text" placeholder="Search branches…" oninput="filterTable(this,'branch-tbody')">
           </div>
         </div>
-        <table id="branch-table">
-          <thead>
-            <tr>
-              <th>Branch</th>
-              <th>Location</th>
-              <th>Manager</th>
-              <th>Therapists</th>
-              <th>Status</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><div style="display:flex;align-items:center;gap:10px"><div class="branch-avatar" style="background:#eff6ff;color:#2563eb">BU</div><span style="font-weight:500">Butuan – Main</span></div></td>
-              <td style="color:var(--muted)">Butuan City, Agusan del Norte</td>
-              <td>Maria Santos</td>
-              <td><span class="badge badge-blue">6 therapists</span></td>
-              <td><span class="badge badge-green">● Open</span></td>
-              <td><button class="btn btn-sm">View</button></td>
-            </tr>
-            <tr>
-              <td><div style="display:flex;align-items:center;gap:10px"><div class="branch-avatar" style="background:#f0fdf4;color:#16a34a">B2</div><span style="font-weight:500">Butuan – Branch 2</span></div></td>
-              <td style="color:var(--muted)">Butuan City, Agusan del Norte</td>
-              <td>Jose Reyes</td>
-              <td><span class="badge badge-blue">5 therapists</span></td>
-              <td><span class="badge badge-green">● Open</span></td>
-              <td><button class="btn btn-sm">View</button></td>
-            </tr>
-            <tr>
-              <td><div style="display:flex;align-items:center;gap:10px"><div class="branch-avatar" style="background:#fef3c7;color:#d97706">AC</div><span style="font-weight:500">Ayala Centrio</span></div></td>
-              <td style="color:var(--muted)">Cagayan de Oro City</td>
-              <td>Ana Cruz</td>
-              <td><span class="badge badge-blue">7 therapists</span></td>
-              <td><span class="badge badge-green">● Open</span></td>
-              <td><button class="btn btn-sm">View</button></td>
-            </tr>
-            <tr>
-              <td><div style="display:flex;align-items:center;gap:10px"><div class="branch-avatar" style="background:#fce7f3;color:#db2777">PC</div><span style="font-weight:500">Patria de Cebu</span></div></td>
-              <td style="color:var(--muted)">Cebu City, Cebu</td>
-              <td>Ramon Villanueva</td>
-              <td><span class="badge badge-blue">5 therapists</span></td>
-              <td><span class="badge badge-green">● Open</span></td>
-              <td><button class="btn btn-sm">View</button></td>
-            </tr>
-            <tr>
-              <td><div style="display:flex;align-items:center;gap:10px"><div class="branch-avatar" style="background:#f3e8ff;color:#9333ea">LM</div><span style="font-weight:500">Limketkai Mall</span></div></td>
-              <td style="color:var(--muted)">Cagayan de Oro City</td>
-              <td>Cynthia Lim</td>
-              <td><span class="badge badge-blue">4 therapists</span></td>
-              <td><span class="badge badge-amber">● On Break</span></td>
-              <td><button class="btn btn-sm">View</button></td>
-            </tr>
-            <tr>
-              <td><div style="display:flex;align-items:center;gap:10px"><div class="branch-avatar" style="background:#ecfdf5;color:#059669">CL</div><span style="font-weight:500">City Legazpi</span></div></td>
-              <td style="color:var(--muted)">Legazpi City, Albay</td>
-              <td>Dennis Ocampo</td>
-              <td><span class="badge badge-blue">4 therapists</span></td>
-              <td><span class="badge badge-green">● Open</span></td>
-              <td><button class="btn btn-sm">View</button></td>
-            </tr>
-            <tr>
-              <td><div style="display:flex;align-items:center;gap:10px"><div class="branch-avatar" style="background:#fff7ed;color:#ea580c">GT</div><span style="font-weight:500">GMALL of Tagum</span></div></td>
-              <td style="color:var(--muted)">Tagum City, Davao del Norte</td>
-              <td>Liza Padua</td>
-              <td><span class="badge badge-blue">5 therapists</span></td>
-              <td><span class="badge badge-green">● Open</span></td>
-              <td><button class="btn btn-sm">View</button></td>
-            </tr>
-            <tr>
-              <td><div style="display:flex;align-items:center;gap:10px"><div class="branch-avatar" style="background:#f0f9ff;color:#0284c7">CP</div><span style="font-weight:500">City Puerto</span></div></td>
-              <td style="color:var(--muted)">Puerto Princesa, Palawan</td>
-              <td>Noel Fernandez</td>
-              <td><span class="badge badge-blue">4 therapists</span></td>
-              <td><span class="badge badge-red">● Closed</span></td>
-              <td><button class="btn btn-sm">View</button></td>
-            </tr>
-          </tbody>
+        <table>
+          <thead><tr><th>Branch</th><th>Location</th><th>Manager</th><th>Therapists</th><th>Status</th><th>Actions</th></tr></thead>
+          <tbody id="branch-tbody"><tr class="loading-row"><td colspan="6"><span class="spinner"></span> Loading…</td></tr></tbody>
         </table>
       </div>
     </div>
 
-    <!-- ══════════════════════════════════════
-         PAGE 2 — DAILY COMMISSIONS
-    ══════════════════════════════════════ -->
+    <!-- PAGE: DAILY COMMISSIONS -->
     <div class="page" id="page-daily-commissions">
       <div class="page-header">
-        <div>
-          <h1 class="page-title">Daily Commissions</h1>
-          <p class="page-subtitle">Therapist commission breakdown for Saturday, April 25, 2026.</p>
-        </div>
+        <div><h1 class="page-title">Daily Commissions</h1><p class="page-subtitle" id="commissions-date">Loading…</p></div>
         <div class="header-actions">
-          <select class="filter-select"><option>All Branches</option><option>Butuan – Main</option><option>Butuan – Branch 2</option><option>Ayala Centrio</option><option>Patria de Cebu</option><option>Limketkai Mall</option><option>City Legazpi</option><option>GMALL of Tagum</option><option>City Puerto</option></select>
+          <select class="filter-select" id="commissions-branch-filter" onchange="loadCommissions()"><option value="">All Branches</option></select>
           <button class="btn btn-primary">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
             Export
           </button>
         </div>
       </div>
-
-      <div class="metric-grid" style="margin-bottom:24px">
-        <div class="metric-card">
-          <div class="metric-header"><span class="metric-label">Total Commissions</span></div>
-          <div class="metric-value">₱8,420</div>
-          <div class="metric-sub">Across all branches today</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-header"><span class="metric-label">Therapists Paid</span></div>
-          <div class="metric-value">34</div>
-          <div class="metric-sub">Out of 40 active</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-header"><span class="metric-label">Avg per Therapist</span></div>
-          <div class="metric-value">₱248</div>
-          <div class="metric-sub">Per therapist today</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-header"><span class="metric-label">Highest Branch</span></div>
-          <div class="metric-value" style="font-size:18px">Ayala Centrio</div>
-          <div class="metric-sub">₱1,820 total commissions</div>
-        </div>
+      <div class="metric-grid">
+        <div class="metric-card"><div class="metric-header"><span class="metric-label">Total Commissions</span></div><div class="metric-value" id="comm-total"><span class="spinner"></span></div><div class="metric-sub" id="comm-sub"></div></div>
+        <div class="metric-card"><div class="metric-header"><span class="metric-label">Records</span></div><div class="metric-value" id="comm-count"><span class="spinner"></span></div><div class="metric-sub">Commission entries today</div></div>
+        <div class="metric-card"><div class="metric-header"><span class="metric-label">Paid</span></div><div class="metric-value" id="comm-paid"><span class="spinner"></span></div><div class="metric-sub">Marked as paid</div></div>
+        <div class="metric-card"><div class="metric-header"><span class="metric-label">Pending</span></div><div class="metric-value" id="comm-pending"><span class="spinner"></span></div><div class="metric-sub">Awaiting payment</div></div>
       </div>
-
       <div class="card">
-        <div class="card-header">
-          <span class="card-title">Commission Records</span>
-          <div class="search-input">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-            <input type="text" placeholder="Search therapist…" oninput="filterTable(this,'commission-table')">
-          </div>
-        </div>
-        <table id="commission-table">
-          <thead><tr><th>Therapist</th><th>Branch</th><th>Sessions</th><th>Rate</th><th>Commission</th><th>Status</th></tr></thead>
-          <tbody>
-            <tr><td style="font-weight:500">Rica Manalo</td><td style="color:var(--muted)">Ayala Centrio</td><td>8</td><td>₱65/session</td><td style="font-family:'DM Mono',monospace;font-weight:500">₱520</td><td><span class="badge badge-green">Paid</span></td></tr>
-            <tr><td style="font-weight:500">Ben Tuazon</td><td style="color:var(--muted)">Butuan – Main</td><td>7</td><td>₱65/session</td><td style="font-family:'DM Mono',monospace;font-weight:500">₱455</td><td><span class="badge badge-green">Paid</span></td></tr>
-            <tr><td style="font-weight:500">Gina Soriano</td><td style="color:var(--muted)">Patria de Cebu</td><td>6</td><td>₱60/session</td><td style="font-family:'DM Mono',monospace;font-weight:500">₱360</td><td><span class="badge badge-green">Paid</span></td></tr>
-            <tr><td style="font-weight:500">Mark Dela Cruz</td><td style="color:var(--muted)">GMALL of Tagum</td><td>5</td><td>₱60/session</td><td style="font-family:'DM Mono',monospace;font-weight:500">₱300</td><td><span class="badge badge-amber">Pending</span></td></tr>
-            <tr><td style="font-weight:500">Luz Bautista</td><td style="color:var(--muted)">City Legazpi</td><td>6</td><td>₱55/session</td><td style="font-family:'DM Mono',monospace;font-weight:500">₱330</td><td><span class="badge badge-green">Paid</span></td></tr>
-            <tr><td style="font-weight:500">Carlo Mendez</td><td style="color:var(--muted)">Butuan – Branch 2</td><td>4</td><td>₱65/session</td><td style="font-family:'DM Mono',monospace;font-weight:500">₱260</td><td><span class="badge badge-amber">Pending</span></td></tr>
-            <tr><td style="font-weight:500">Tina Reyes</td><td style="color:var(--muted)">Limketkai Mall</td><td>3</td><td>₱60/session</td><td style="font-family:'DM Mono',monospace;font-weight:500">₱180</td><td><span class="badge badge-muted">On Break</span></td></tr>
-            <tr><td style="font-weight:500">Noel Castro</td><td style="color:var(--muted)">Ayala Centrio</td><td>7</td><td>₱65/session</td><td style="font-family:'DM Mono',monospace;font-weight:500">₱455</td><td><span class="badge badge-green">Paid</span></td></tr>
-          </tbody>
+        <div class="card-header"><span class="card-title">Commission Records</span></div>
+        <table>
+          <thead><tr><th>Therapist</th><th>Branch</th><th>Sessions</th><th>Rate/Session</th><th>Total</th><th>Status</th></tr></thead>
+          <tbody id="commissions-tbody"><tr class="loading-row"><td colspan="6"><span class="spinner"></span> Loading…</td></tr></tbody>
         </table>
       </div>
     </div>
 
-    <!-- ══════════════════════════════════════
-         PAGE 3 — DAILY SALES
-    ══════════════════════════════════════ -->
+    <!-- PAGE: DAILY SALES -->
     <div class="page" id="page-daily-sales">
       <div class="page-header">
-        <div>
-          <h1 class="page-title">Daily Sales</h1>
-          <p class="page-subtitle">Sales transactions for Saturday, April 25, 2026.</p>
-        </div>
+        <div><h1 class="page-title">Daily Sales</h1><p class="page-subtitle" id="sales-date">Loading…</p></div>
         <div class="header-actions">
-          <select class="filter-select"><option>All Branches</option><option>Butuan – Main</option><option>Butuan – Branch 2</option><option>Ayala Centrio</option><option>Patria de Cebu</option><option>Limketkai Mall</option><option>City Legazpi</option><option>GMALL of Tagum</option><option>City Puerto</option></select>
+          <select class="filter-select" id="sales-branch-filter" onchange="loadSales()"><option value="">All Branches</option></select>
           <button class="btn btn-primary">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
             Export
           </button>
         </div>
       </div>
-
       <div class="metric-grid">
-        <div class="metric-card">
-          <div class="metric-header"><span class="metric-label">Total Sales</span></div>
-          <div class="metric-value">₱50,700</div>
-          <div class="metric-sub"><span style="color:var(--green)">↗ +12.5%</span> from yesterday</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-header"><span class="metric-label">Transactions</span></div>
-          <div class="metric-value">183</div>
-          <div class="metric-sub">Across all branches</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-header"><span class="metric-label">Avg Transaction</span></div>
-          <div class="metric-value">₱277</div>
-          <div class="metric-sub">Per transaction today</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-header"><span class="metric-label">Top Branch</span></div>
-          <div class="metric-value" style="font-size:18px">Ayala Centrio</div>
-          <div class="metric-sub">₱9,200 in sales</div>
-        </div>
+        <div class="metric-card"><div class="metric-header"><span class="metric-label">Total Sales</span></div><div class="metric-value" id="sales-total"><span class="spinner"></span></div><div class="metric-sub" id="sales-sub"></div></div>
+        <div class="metric-card"><div class="metric-header"><span class="metric-label">Transactions</span></div><div class="metric-value" id="sales-count"><span class="spinner"></span></div><div class="metric-sub">Today's transactions</div></div>
+        <div class="metric-card"><div class="metric-header"><span class="metric-label">Avg Transaction</span></div><div class="metric-value" id="sales-avg"><span class="spinner"></span></div><div class="metric-sub">Per transaction</div></div>
+        <div class="metric-card"><div class="metric-header"><span class="metric-label">Top Branch</span></div><div class="metric-value" id="sales-top" style="font-size:16px"><span class="spinner"></span></div><div class="metric-sub" id="sales-top-sub"></div></div>
       </div>
-
-      <div class="chart-grid-2">
-        <div class="chart-card">
-          <div class="chart-title">Sales by Branch</div>
-          <div class="chart-subtitle">Today's revenue per location</div>
-          <div style="height:220px"><canvas id="salesByBranch"></canvas></div>
-        </div>
-        <div class="chart-card">
-          <div class="chart-title">Hourly Sales Trend</div>
-          <div class="chart-subtitle">Revenue flow throughout the day</div>
-          <div style="height:220px"><canvas id="hourlySales"></canvas></div>
-        </div>
-      </div>
-
-      <div class="card" style="margin-top:24px">
+      <div class="card">
         <div class="card-header">
           <span class="card-title">Transaction Records</span>
-          <div class="search-input">
+          <div class="search-box">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-            <input type="text" placeholder="Search…" oninput="filterTable(this,'sales-table')">
+            <input type="text" placeholder="Search…" oninput="filterTable(this,'sales-tbody')">
           </div>
         </div>
-        <table id="sales-table">
+        <table>
           <thead><tr><th>Time</th><th>Branch</th><th>Service</th><th>Therapist</th><th>Amount</th><th>Payment</th></tr></thead>
-          <tbody>
-            <tr><td style="color:var(--muted);font-size:12.5px">10:15 AM</td><td style="color:var(--muted)">Ayala Centrio</td><td>Swedish Massage (60min)</td><td>Rica Manalo</td><td style="font-family:'DM Mono',monospace;font-weight:500">₱450</td><td><span class="badge badge-blue">GCash</span></td></tr>
-            <tr><td style="color:var(--muted);font-size:12.5px">10:32 AM</td><td style="color:var(--muted)">Butuan – Main</td><td>Foot Spa (45min)</td><td>Ben Tuazon</td><td style="font-family:'DM Mono',monospace;font-weight:500">₱280</td><td><span class="badge badge-muted">Cash</span></td></tr>
-            <tr><td style="color:var(--muted);font-size:12.5px">11:05 AM</td><td style="color:var(--muted)">Patria de Cebu</td><td>Hot Stone Massage (90min)</td><td>Gina Soriano</td><td style="font-family:'DM Mono',monospace;font-weight:500">₱750</td><td><span class="badge badge-green">Maya</span></td></tr>
-            <tr><td style="color:var(--muted);font-size:12.5px">11:48 AM</td><td style="color:var(--muted)">GMALL of Tagum</td><td>Swedish Massage (60min)</td><td>Mark Dela Cruz</td><td style="font-family:'DM Mono',monospace;font-weight:500">₱450</td><td><span class="badge badge-muted">Cash</span></td></tr>
-            <tr><td style="color:var(--muted);font-size:12.5px">12:20 PM</td><td style="color:var(--muted)">City Legazpi</td><td>Shiatsu (60min)</td><td>Luz Bautista</td><td style="font-family:'DM Mono',monospace;font-weight:500">₱400</td><td><span class="badge badge-blue">GCash</span></td></tr>
-            <tr><td style="color:var(--muted);font-size:12.5px">1:10 PM</td><td style="color:var(--muted)">Butuan – Branch 2</td><td>Foot Spa (45min)</td><td>Carlo Mendez</td><td style="font-family:'DM Mono',monospace;font-weight:500">₱280</td><td><span class="badge badge-muted">Cash</span></td></tr>
-            <tr><td style="color:var(--muted);font-size:12.5px">2:00 PM</td><td style="color:var(--muted)">Ayala Centrio</td><td>Swedish Massage (60min)</td><td>Noel Castro</td><td style="font-family:'DM Mono',monospace;font-weight:500">₱450</td><td><span class="badge badge-blue">GCash</span></td></tr>
-          </tbody>
+          <tbody id="sales-tbody"><tr class="loading-row"><td colspan="6"><span class="spinner"></span> Loading…</td></tr></tbody>
         </table>
       </div>
     </div>
 
-    <!-- ══════════════════════════════════════
-         PAGE 4 — DAILY EXPENSES
-    ══════════════════════════════════════ -->
+    <!-- PAGE: DAILY EXPENSES -->
     <div class="page" id="page-daily-expenses">
       <div class="page-header">
-        <div>
-          <h1 class="page-title">Daily Expenses</h1>
-          <p class="page-subtitle">Expenses logged for Saturday, April 25, 2026.</p>
-        </div>
+        <div><h1 class="page-title">Daily Expenses</h1><p class="page-subtitle" id="expenses-date">Loading…</p></div>
         <div class="header-actions">
-          <select class="filter-select"><option>All Branches</option><option>Butuan – Main</option><option>Butuan – Branch 2</option><option>Ayala Centrio</option><option>Patria de Cebu</option><option>Limketkai Mall</option><option>City Legazpi</option><option>GMALL of Tagum</option><option>City Puerto</option></select>
-          <button class="btn btn-primary">
+          <select class="filter-select" id="expenses-branch-filter" onchange="loadExpenses()"><option value="">All Branches</option></select>
+          <button class="btn btn-primary" onclick="openAddExpense()">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
             Log Expense
           </button>
         </div>
       </div>
-
       <div class="metric-grid">
-        <div class="metric-card">
-          <div class="metric-header"><span class="metric-label">Total Expenses</span></div>
-          <div class="metric-value">₱12,000</div>
-          <div class="metric-sub"><span style="color:var(--red)">↗ +2.4%</span> vs target</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-header"><span class="metric-label">Expense Items</span></div>
-          <div class="metric-value">28</div>
-          <div class="metric-sub">Logged today</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-header"><span class="metric-label">Approved</span></div>
-          <div class="metric-value">22</div>
-          <div class="metric-sub"><span style="color:var(--amber)">6 pending</span> review</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-header"><span class="metric-label">Highest Category</span></div>
-          <div class="metric-value" style="font-size:18px">Supplies</div>
-          <div class="metric-sub">₱4,200 today</div>
-        </div>
+        <div class="metric-card"><div class="metric-header"><span class="metric-label">Total Expenses</span></div><div class="metric-value" id="exp-total"><span class="spinner"></span></div><div class="metric-sub" id="exp-sub"></div></div>
+        <div class="metric-card"><div class="metric-header"><span class="metric-label">Items Logged</span></div><div class="metric-value" id="exp-count"><span class="spinner"></span></div><div class="metric-sub">Today</div></div>
+        <div class="metric-card"><div class="metric-header"><span class="metric-label">Approved</span></div><div class="metric-value" id="exp-approved"><span class="spinner"></span></div><div class="metric-sub" id="exp-pending-sub"></div></div>
+        <div class="metric-card"><div class="metric-header"><span class="metric-label">Top Category</span></div><div class="metric-value" id="exp-top-cat" style="font-size:16px"><span class="spinner"></span></div><div class="metric-sub" id="exp-top-cat-sub"></div></div>
       </div>
-
-      <div class="card" style="margin-top:0">
+      <div class="card">
         <div class="card-header">
           <span class="card-title">Expense Records</span>
-          <div class="search-input">
+          <div class="search-box">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-            <input type="text" placeholder="Search…" oninput="filterTable(this,'expense-table')">
+            <input type="text" placeholder="Search…" oninput="filterTable(this,'expenses-tbody')">
           </div>
         </div>
-        <table id="expense-table">
-          <thead><tr><th>Time</th><th>Branch</th><th>Category</th><th>Description</th><th>Amount</th><th>Status</th></tr></thead>
-          <tbody>
-            <tr><td style="color:var(--muted);font-size:12.5px">8:30 AM</td><td style="color:var(--muted)">Butuan – Main</td><td>Supplies</td><td>Massage oil restock</td><td style="font-family:'DM Mono',monospace;font-weight:500">₱1,200</td><td><span class="badge badge-green">Approved</span></td></tr>
-            <tr><td style="color:var(--muted);font-size:12.5px">9:00 AM</td><td style="color:var(--muted)">Ayala Centrio</td><td>Utilities</td><td>Electricity partial bill</td><td style="font-family:'DM Mono',monospace;font-weight:500">₱2,500</td><td><span class="badge badge-green">Approved</span></td></tr>
-            <tr><td style="color:var(--muted);font-size:12.5px">9:45 AM</td><td style="color:var(--muted)">Patria de Cebu</td><td>Supplies</td><td>Towels and linens</td><td style="font-family:'DM Mono',monospace;font-weight:500">₱800</td><td><span class="badge badge-amber">Pending</span></td></tr>
-            <tr><td style="color:var(--muted);font-size:12.5px">10:15 AM</td><td style="color:var(--muted)">GMALL of Tagum</td><td>Maintenance</td><td>AC unit servicing</td><td style="font-family:'DM Mono',monospace;font-weight:500">₱1,500</td><td><span class="badge badge-green">Approved</span></td></tr>
-            <tr><td style="color:var(--muted);font-size:12.5px">11:00 AM</td><td style="color:var(--muted)">Limketkai Mall</td><td>Supplies</td><td>Aromatherapy oils</td><td style="font-family:'DM Mono',monospace;font-weight:500">₱650</td><td><span class="badge badge-amber">Pending</span></td></tr>
-            <tr><td style="color:var(--muted);font-size:12.5px">12:30 PM</td><td style="color:var(--muted)">City Legazpi</td><td>Food</td><td>Staff lunch allowance</td><td style="font-family:'DM Mono',monospace;font-weight:500">₱900</td><td><span class="badge badge-green">Approved</span></td></tr>
-            <tr><td style="color:var(--muted);font-size:12.5px">2:00 PM</td><td style="color:var(--muted)">Butuan – Branch 2</td><td>Maintenance</td><td>Plumbing repair</td><td style="font-family:'DM Mono',monospace;font-weight:500">₱2,200</td><td><span class="badge badge-amber">Pending</span></td></tr>
-            <tr><td style="color:var(--muted);font-size:12.5px">3:15 PM</td><td style="color:var(--muted)">Ayala Centrio</td><td>Supplies</td><td>Disposable slippers</td><td style="font-family:'DM Mono',monospace;font-weight:500">₱480</td><td><span class="badge badge-green">Approved</span></td></tr>
-          </tbody>
+        <table>
+          <thead><tr><th>Date</th><th>Branch</th><th>Category</th><th>Description</th><th>Amount</th><th>Status</th><th>Actions</th></tr></thead>
+          <tbody id="expenses-tbody"><tr class="loading-row"><td colspan="7"><span class="spinner"></span> Loading…</td></tr></tbody>
         </table>
       </div>
     </div>
 
-    <!-- ══════════════════════════════════════
-         PAGE 5 — MONITORING
-    ══════════════════════════════════════ -->
+    <!-- PAGE: MONITORING -->
     <div class="page" id="page-monitoring">
       <div class="page-header">
-        <div>
-          <h1 class="page-title">Monitoring</h1>
-          <p class="page-subtitle">Live branch status overview for Saturday, April 25, 2026.</p>
-        </div>
+        <div><h1 class="page-title">Monitoring</h1><p class="page-subtitle">Live branch status overview.</p></div>
         <div class="header-actions">
-          <button class="btn">
+          <button class="btn" onclick="loadMonitoring()">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg>
             Refresh
           </button>
         </div>
       </div>
-
-      <div class="monitor-grid">
-        <!-- Card for each branch -->
-        <div class="monitor-card">
-          <div class="monitor-card-header">
-            <div><div class="monitor-branch-name">Butuan – Main</div><div style="font-size:12px;color:var(--muted)">Butuan City</div></div>
-            <span class="badge badge-green">● Open</span>
-          </div>
-          <div class="monitor-row"><span class="monitor-label">Therapists in</span><span class="monitor-val">6 / 6</span></div>
-          <div class="monitor-row"><span class="monitor-label">Sessions today</span><span class="monitor-val">32</span></div>
-          <div class="monitor-row"><span class="monitor-label">Revenue today</span><span class="monitor-val">₱7,800</span></div>
-          <div class="monitor-row"><span class="monitor-label">Occupancy</span><span class="monitor-val">85%</span></div>
-          <div class="progress-bar" style="margin-top:10px"><div class="progress-fill" style="width:85%;background:var(--green)"></div></div>
-        </div>
-
-        <div class="monitor-card">
-          <div class="monitor-card-header">
-            <div><div class="monitor-branch-name">Butuan – Branch 2</div><div style="font-size:12px;color:var(--muted)">Butuan City</div></div>
-            <span class="badge badge-green">● Open</span>
-          </div>
-          <div class="monitor-row"><span class="monitor-label">Therapists in</span><span class="monitor-val">5 / 5</span></div>
-          <div class="monitor-row"><span class="monitor-label">Sessions today</span><span class="monitor-val">26</span></div>
-          <div class="monitor-row"><span class="monitor-label">Revenue today</span><span class="monitor-val">₱6,200</span></div>
-          <div class="monitor-row"><span class="monitor-label">Occupancy</span><span class="monitor-val">72%</span></div>
-          <div class="progress-bar" style="margin-top:10px"><div class="progress-fill" style="width:72%;background:var(--accent)"></div></div>
-        </div>
-
-        <div class="monitor-card">
-          <div class="monitor-card-header">
-            <div><div class="monitor-branch-name">Ayala Centrio</div><div style="font-size:12px;color:var(--muted)">Cagayan de Oro</div></div>
-            <span class="badge badge-green">● Open</span>
-          </div>
-          <div class="monitor-row"><span class="monitor-label">Therapists in</span><span class="monitor-val">7 / 7</span></div>
-          <div class="monitor-row"><span class="monitor-label">Sessions today</span><span class="monitor-val">41</span></div>
-          <div class="monitor-row"><span class="monitor-label">Revenue today</span><span class="monitor-val">₱9,200</span></div>
-          <div class="monitor-row"><span class="monitor-label">Occupancy</span><span class="monitor-val">93%</span></div>
-          <div class="progress-bar" style="margin-top:10px"><div class="progress-fill" style="width:93%;background:var(--green)"></div></div>
-        </div>
-
-        <div class="monitor-card">
-          <div class="monitor-card-header">
-            <div><div class="monitor-branch-name">Patria de Cebu</div><div style="font-size:12px;color:var(--muted)">Cebu City</div></div>
-            <span class="badge badge-green">● Open</span>
-          </div>
-          <div class="monitor-row"><span class="monitor-label">Therapists in</span><span class="monitor-val">4 / 5</span></div>
-          <div class="monitor-row"><span class="monitor-label">Sessions today</span><span class="monitor-val">22</span></div>
-          <div class="monitor-row"><span class="monitor-label">Revenue today</span><span class="monitor-val">₱5,400</span></div>
-          <div class="monitor-row"><span class="monitor-label">Occupancy</span><span class="monitor-val">66%</span></div>
-          <div class="progress-bar" style="margin-top:10px"><div class="progress-fill" style="width:66%;background:var(--amber)"></div></div>
-        </div>
-
-        <div class="monitor-card">
-          <div class="monitor-card-header">
-            <div><div class="monitor-branch-name">Limketkai Mall</div><div style="font-size:12px;color:var(--muted)">Cagayan de Oro</div></div>
-            <span class="badge badge-amber">● On Break</span>
-          </div>
-          <div class="monitor-row"><span class="monitor-label">Therapists in</span><span class="monitor-val">2 / 4</span></div>
-          <div class="monitor-row"><span class="monitor-label">Sessions today</span><span class="monitor-val">14</span></div>
-          <div class="monitor-row"><span class="monitor-label">Revenue today</span><span class="monitor-val">₱3,200</span></div>
-          <div class="monitor-row"><span class="monitor-label">Occupancy</span><span class="monitor-val">40%</span></div>
-          <div class="progress-bar" style="margin-top:10px"><div class="progress-fill" style="width:40%;background:var(--amber)"></div></div>
-        </div>
-
-        <div class="monitor-card">
-          <div class="monitor-card-header">
-            <div><div class="monitor-branch-name">City Legazpi</div><div style="font-size:12px;color:var(--muted)">Legazpi City</div></div>
-            <span class="badge badge-green">● Open</span>
-          </div>
-          <div class="monitor-row"><span class="monitor-label">Therapists in</span><span class="monitor-val">4 / 4</span></div>
-          <div class="monitor-row"><span class="monitor-label">Sessions today</span><span class="monitor-val">18</span></div>
-          <div class="monitor-row"><span class="monitor-label">Revenue today</span><span class="monitor-val">₱4,600</span></div>
-          <div class="monitor-row"><span class="monitor-label">Occupancy</span><span class="monitor-val">78%</span></div>
-          <div class="progress-bar" style="margin-top:10px"><div class="progress-fill" style="width:78%;background:var(--green)"></div></div>
-        </div>
-
-        <div class="monitor-card">
-          <div class="monitor-card-header">
-            <div><div class="monitor-branch-name">GMALL of Tagum</div><div style="font-size:12px;color:var(--muted)">Tagum City</div></div>
-            <span class="badge badge-green">● Open</span>
-          </div>
-          <div class="monitor-row"><span class="monitor-label">Therapists in</span><span class="monitor-val">5 / 5</span></div>
-          <div class="monitor-row"><span class="monitor-label">Sessions today</span><span class="monitor-val">24</span></div>
-          <div class="monitor-row"><span class="monitor-label">Revenue today</span><span class="monitor-val">₱6,800</span></div>
-          <div class="monitor-row"><span class="monitor-label">Occupancy</span><span class="monitor-val">80%</span></div>
-          <div class="progress-bar" style="margin-top:10px"><div class="progress-fill" style="width:80%;background:var(--green)"></div></div>
-        </div>
-
-        <div class="monitor-card">
-          <div class="monitor-card-header">
-            <div><div class="monitor-branch-name">City Puerto</div><div style="font-size:12px;color:var(--muted)">Puerto Princesa</div></div>
-            <span class="badge badge-red">● Closed</span>
-          </div>
-          <div class="monitor-row"><span class="monitor-label">Therapists in</span><span class="monitor-val">0 / 4</span></div>
-          <div class="monitor-row"><span class="monitor-label">Sessions today</span><span class="monitor-val">0</span></div>
-          <div class="monitor-row"><span class="monitor-label">Revenue today</span><span class="monitor-val">₱0</span></div>
-          <div class="monitor-row"><span class="monitor-label">Occupancy</span><span class="monitor-val">0%</span></div>
-          <div class="progress-bar" style="margin-top:10px"><div class="progress-fill" style="width:0%;background:var(--red)"></div></div>
-        </div>
+      <div class="monitor-grid" id="monitor-grid">
+        <div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--muted)"><span class="spinner"></span> Loading branch data…</div>
       </div>
     </div>
 
-    <!-- ══════════════════════════════════════
-         PAGE 6 — BRANCH PERFORMANCE
-    ══════════════════════════════════════ -->
+    <!-- PAGE: BRANCH PERFORMANCE -->
     <div class="page" id="page-branch-performance">
       <div class="page-header">
-        <div>
-          <h1 class="page-title">Branch Performance</h1>
-          <p class="page-subtitle">Comparative performance across all branches.</p>
-        </div>
+        <div><h1 class="page-title">Branch Performance</h1><p class="page-subtitle">Comparative performance across all branches.</p></div>
         <div class="header-actions">
-          <select class="filter-select"><option>Last 7 Days</option><option>This Month</option><option>Last Month</option><option>This Quarter</option></select>
           <button class="btn btn-primary">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
             Export Report
           </button>
         </div>
       </div>
-
       <div class="metric-grid">
-        <div class="metric-card">
-          <div class="metric-header"><span class="metric-label">Best Revenue</span></div>
-          <div class="metric-value" style="font-size:18px">Ayala Centrio</div>
-          <div class="metric-sub">₱9,200 today</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-header"><span class="metric-label">Most Sessions</span></div>
-          <div class="metric-value" style="font-size:18px">Ayala Centrio</div>
-          <div class="metric-sub">41 sessions today</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-header"><span class="metric-label">Highest Occupancy</span></div>
-          <div class="metric-value">93%</div>
-          <div class="metric-sub">Ayala Centrio</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-header"><span class="metric-label">Needs Attention</span></div>
-          <div class="metric-value" style="font-size:18px">City Puerto</div>
-          <div class="metric-sub">Currently closed</div>
-        </div>
+        <div class="metric-card"><div class="metric-header"><span class="metric-label">Best Revenue</span></div><div class="metric-value" id="perf-best" style="font-size:16px"><span class="spinner"></span></div><div class="metric-sub" id="perf-best-sub"></div></div>
+        <div class="metric-card"><div class="metric-header"><span class="metric-label">Most Sales</span></div><div class="metric-value" id="perf-txn" style="font-size:16px"><span class="spinner"></span></div><div class="metric-sub" id="perf-txn-sub"></div></div>
+        <div class="metric-card"><div class="metric-header"><span class="metric-label">Total Revenue Today</span></div><div class="metric-value" id="perf-total"><span class="spinner"></span></div><div class="metric-sub">All branches combined</div></div>
+        <div class="metric-card"><div class="metric-header"><span class="metric-label">Open Branches</span></div><div class="metric-value" id="perf-open"><span class="spinner"></span></div><div class="metric-sub" id="perf-open-sub"></div></div>
       </div>
-
       <div class="chart-grid-2">
-        <div class="chart-card">
-          <div class="chart-title">Revenue by Branch</div>
-          <div class="chart-subtitle">Today's sales per location</div>
-          <div style="height:240px"><canvas id="perfRevenue"></canvas></div>
-        </div>
-        <div class="chart-card">
-          <div class="chart-title">Sessions by Branch</div>
-          <div class="chart-subtitle">Number of sessions completed today</div>
-          <div style="height:240px"><canvas id="perfSessions"></canvas></div>
-        </div>
+        <div class="chart-card"><div class="chart-title">Revenue by Branch</div><div class="chart-subtitle">Today's sales per location</div><div style="height:240px"><canvas id="perfRevenueChart"></canvas></div></div>
+        <div class="chart-card"><div class="chart-title">Expenses by Branch</div><div class="chart-subtitle">Today's expenses per location</div><div style="height:240px"><canvas id="perfExpensesChart"></canvas></div></div>
       </div>
-
       <div class="card" style="margin-top:24px">
         <div class="card-header"><span class="card-title">Branch Scorecard</span></div>
         <table>
-          <thead><tr><th>Branch</th><th>Sessions</th><th>Revenue</th><th>Expenses</th><th>Net</th><th>Occupancy</th><th>Rank</th></tr></thead>
-          <tbody>
-            <tr><td style="font-weight:500">Ayala Centrio</td><td>41</td><td style="font-family:'DM Mono',monospace">₱9,200</td><td style="font-family:'DM Mono',monospace;color:var(--red)">₱1,800</td><td style="font-family:'DM Mono',monospace;color:var(--green)">₱7,400</td><td><span class="badge badge-green">93%</span></td><td>🥇 1st</td></tr>
-            <tr><td style="font-weight:500">GMALL of Tagum</td><td>24</td><td style="font-family:'DM Mono',monospace">₱6,800</td><td style="font-family:'DM Mono',monospace;color:var(--red)">₱1,200</td><td style="font-family:'DM Mono',monospace;color:var(--green)">₱5,600</td><td><span class="badge badge-green">80%</span></td><td>🥈 2nd</td></tr>
-            <tr><td style="font-weight:500">Butuan – Main</td><td>32</td><td style="font-family:'DM Mono',monospace">₱7,800</td><td style="font-family:'DM Mono',monospace;color:var(--red)">₱2,100</td><td style="font-family:'DM Mono',monospace;color:var(--green)">₱5,700</td><td><span class="badge badge-green">85%</span></td><td>🥉 3rd</td></tr>
-            <tr><td style="font-weight:500">Butuan – Branch 2</td><td>26</td><td style="font-family:'DM Mono',monospace">₱6,200</td><td style="font-family:'DM Mono',monospace;color:var(--red)">₱1,400</td><td style="font-family:'DM Mono',monospace;color:var(--green)">₱4,800</td><td><span class="badge badge-blue">72%</span></td><td>4th</td></tr>
-            <tr><td style="font-weight:500">City Legazpi</td><td>18</td><td style="font-family:'DM Mono',monospace">₱4,600</td><td style="font-family:'DM Mono',monospace;color:var(--red)">₱900</td><td style="font-family:'DM Mono',monospace;color:var(--green)">₱3,700</td><td><span class="badge badge-blue">78%</span></td><td>5th</td></tr>
-            <tr><td style="font-weight:500">Patria de Cebu</td><td>22</td><td style="font-family:'DM Mono',monospace">₱5,400</td><td style="font-family:'DM Mono',monospace;color:var(--red)">₱1,600</td><td style="font-family:'DM Mono',monospace;color:var(--green)">₱3,800</td><td><span class="badge badge-amber">66%</span></td><td>6th</td></tr>
-            <tr><td style="font-weight:500">Limketkai Mall</td><td>14</td><td style="font-family:'DM Mono',monospace">₱3,200</td><td style="font-family:'DM Mono',monospace;color:var(--red)">₱800</td><td style="font-family:'DM Mono',monospace;color:var(--green)">₱2,400</td><td><span class="badge badge-amber">40%</span></td><td>7th</td></tr>
-            <tr><td style="font-weight:500">City Puerto</td><td>0</td><td style="font-family:'DM Mono',monospace">₱0</td><td style="font-family:'DM Mono',monospace;color:var(--red)">₱0</td><td style="font-family:'DM Mono',monospace">₱0</td><td><span class="badge badge-red">Closed</span></td><td>—</td></tr>
-          </tbody>
+          <thead><tr><th>Branch</th><th>Transactions</th><th>Revenue</th><th>Expenses</th><th>Net</th><th>Status</th></tr></thead>
+          <tbody id="scorecard-tbody"><tr class="loading-row"><td colspan="6"><span class="spinner"></span> Loading…</td></tr></tbody>
         </table>
       </div>
     </div>
 
-    <!-- ══════════════════════════════════════
-         PAGE 7 — BRANCH ACTIVITY LOG
-    ══════════════════════════════════════ -->
+    <!-- PAGE: ACTIVITY LOG -->
     <div class="page" id="page-activity-log">
       <div class="page-header">
-        <div>
-          <h1 class="page-title">Branch Activity Log</h1>
-          <p class="page-subtitle">All activity and events across branches today.</p>
-        </div>
+        <div><h1 class="page-title">Branch Activity Log</h1><p class="page-subtitle">All activity and events across branches.</p></div>
         <div class="header-actions">
-          <select class="filter-select"><option>All Branches</option><option>Butuan – Main</option><option>Butuan – Branch 2</option><option>Ayala Centrio</option><option>Patria de Cebu</option><option>Limketkai Mall</option><option>City Legazpi</option><option>GMALL of Tagum</option><option>City Puerto</option></select>
-          <select class="filter-select"><option>All Events</option><option>Sales</option><option>Expenses</option><option>Staff</option><option>System</option></select>
+          <select class="filter-select" id="log-branch-filter" onchange="loadActivityLog()"><option value="">All Branches</option></select>
+          <select class="filter-select" id="log-type-filter" onchange="loadActivityLog()">
+            <option value="">All Events</option>
+            <option value="sale">Sales</option>
+            <option value="expense">Expenses</option>
+            <option value="staff">Staff</option>
+            <option value="system">System</option>
+            <option value="branch">Branch</option>
+          </select>
         </div>
       </div>
-
       <div class="card">
-        <div class="activity-list">
-          <div class="activity-item">
-            <div class="activity-dot activity-dot-green" style="margin-top:5px"></div>
-            <div style="flex:1">
-              <div class="activity-text"><strong>New sale recorded</strong> — Swedish Massage (60min) for ₱450</div>
-              <div class="activity-branch">Ayala Centrio · Therapist: Rica Manalo</div>
-            </div>
-            <div class="activity-time">3:45 PM</div>
-          </div>
-          <div class="activity-item">
-            <div class="activity-dot activity-dot-amber" style="margin-top:5px"></div>
-            <div style="flex:1">
-              <div class="activity-text"><strong>Expense submitted</strong> — Disposable slippers restock (₱480) pending approval</div>
-              <div class="activity-branch">Ayala Centrio · Submitted by: Ana Cruz</div>
-            </div>
-            <div class="activity-time">3:15 PM</div>
-          </div>
-          <div class="activity-item">
-            <div class="activity-dot activity-dot-blue" style="margin-top:5px"></div>
-            <div style="flex:1">
-              <div class="activity-text"><strong>Therapist clocked in</strong> — Gina Soriano started shift</div>
-              <div class="activity-branch">Patria de Cebu</div>
-            </div>
-            <div class="activity-time">2:30 PM</div>
-          </div>
-          <div class="activity-item">
-            <div class="activity-dot activity-dot-amber" style="margin-top:5px"></div>
-            <div style="flex:1">
-              <div class="activity-text"><strong>Expense submitted</strong> — Plumbing repair (₱2,200) pending approval</div>
-              <div class="activity-branch">Butuan – Branch 2 · Submitted by: Jose Reyes</div>
-            </div>
-            <div class="activity-time">2:00 PM</div>
-          </div>
-          <div class="activity-item">
-            <div class="activity-dot activity-dot-green" style="margin-top:5px"></div>
-            <div style="flex:1">
-              <div class="activity-text"><strong>New sale recorded</strong> — Shiatsu (60min) for ₱400</div>
-              <div class="activity-branch">City Legazpi · Therapist: Luz Bautista</div>
-            </div>
-            <div class="activity-time">12:20 PM</div>
-          </div>
-          <div class="activity-item">
-            <div class="activity-dot activity-dot-green" style="margin-top:5px"></div>
-            <div style="flex:1">
-              <div class="activity-text"><strong>Expense approved</strong> — Staff lunch allowance (₱900)</div>
-              <div class="activity-branch">City Legazpi · Approved by: Jerome</div>
-            </div>
-            <div class="activity-time">12:35 PM</div>
-          </div>
-          <div class="activity-item">
-            <div class="activity-dot activity-dot-blue" style="margin-top:5px"></div>
-            <div style="flex:1">
-              <div class="activity-text"><strong>Branch opened</strong> — All therapists checked in and ready</div>
-              <div class="activity-branch">GMALL of Tagum · Opened by: Liza Padua</div>
-            </div>
-            <div class="activity-time">10:00 AM</div>
-          </div>
-          <div class="activity-item">
-            <div class="activity-dot activity-dot-green" style="margin-top:5px"></div>
-            <div style="flex:1">
-              <div class="activity-text"><strong>New sale recorded</strong> — Hot Stone Massage (90min) for ₱750</div>
-              <div class="activity-branch">Patria de Cebu · Therapist: Gina Soriano</div>
-            </div>
-            <div class="activity-time">11:05 AM</div>
-          </div>
-          <div class="activity-item">
-            <div class="activity-dot activity-dot-green" style="margin-top:5px"></div>
-            <div style="flex:1">
-              <div class="activity-text"><strong>Expense approved</strong> — AC unit servicing (₱1,500)</div>
-              <div class="activity-branch">GMALL of Tagum · Approved by: Jerome</div>
-            </div>
-            <div class="activity-time">10:30 AM</div>
-          </div>
-          <div class="activity-item">
-            <div class="activity-dot activity-dot-green" style="margin-top:5px"></div>
-            <div style="flex:1">
-              <div class="activity-text"><strong>Expense approved</strong> — Massage oil restock (₱1,200)</div>
-              <div class="activity-branch">Butuan – Main · Approved by: Jerome</div>
-            </div>
-            <div class="activity-time">8:45 AM</div>
-          </div>
-          <div class="activity-item">
-            <div class="activity-dot activity-dot-red" style="margin-top:5px"></div>
-            <div style="flex:1">
-              <div class="activity-text"><strong>Branch marked closed</strong> — No staff available today</div>
-              <div class="activity-branch">City Puerto · Noted by: Noel Fernandez</div>
-            </div>
-            <div class="activity-time">8:00 AM</div>
-          </div>
-          <div class="activity-item">
-            <div class="activity-dot activity-dot-blue" style="margin-top:5px"></div>
-            <div style="flex:1">
-              <div class="activity-text"><strong>Day started</strong> — Admin portal opened for Saturday, April 25, 2026</div>
-              <div class="activity-branch">System</div>
-            </div>
-            <div class="activity-time">7:00 AM</div>
-          </div>
+        <div class="activity-list" id="activity-list">
+          <div style="text-align:center;padding:40px;color:var(--muted)"><span class="spinner"></span> Loading activity…</div>
         </div>
       </div>
     </div>
 
-  </div><!-- /content -->
+  </div>
 </main>
 
 <script>
-  // ── Navigation ──
-  const pages = {
-    'branch-list':        { label: 'Branch List',         breadcrumb: 'Branch List' },
-    'daily-commissions':  { label: 'Daily Commissions',   breadcrumb: 'Daily Operations › Daily Commissions' },
-    'daily-sales':        { label: 'Daily Sales',         breadcrumb: 'Daily Operations › Daily Sales' },
-    'daily-expenses':     { label: 'Daily Expenses',      breadcrumb: 'Daily Operations › Daily Expenses' },
-    'monitoring':         { label: 'Monitoring',          breadcrumb: 'Daily Operations › Monitoring' },
-    'branch-performance': { label: 'Branch Performance',  breadcrumb: 'Daily Operations › Branch Performance' },
-    'activity-log':       { label: 'Branch Activity Log', breadcrumb: 'Daily Operations › Branch Activity Log' },
+  // ── Supabase Config ──────────────────────────────────────────
+  const SUPABASE_URL = 'https://bzizemhbfisbjrllyqfu.supabase.co';
+  const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ6aXplbWhiZmlzYmpybGx5cWZ1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAxNTA4NzksImV4cCI6MjA4NTcyNjg3OX0.6K7B5reuK2b9YJO0CqtJH_VB8GLUa9aKvlb4fboVB-s';
+  const H = { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY, 'Content-Type': 'application/json' };
+
+  async function db(table, params = '') {
+    const r = await fetch(`${SUPABASE_URL}/rest/v1/${table}${params}`, { headers: H });
+    if (!r.ok) throw new Error(`${table} ${r.status}`);
+    return r.json();
+  }
+
+  async function dbInsert(table, data) {
+    const r = await fetch(`${SUPABASE_URL}/rest/v1/${table}`, {
+      method: 'POST', headers: { ...H, 'Prefer': 'return=representation' },
+      body: JSON.stringify(data)
+    });
+    if (!r.ok) throw new Error(await r.text());
+    return r.json();
+  }
+
+  async function dbUpdate(table, id, data) {
+    const r = await fetch(`${SUPABASE_URL}/rest/v1/${table}?id=eq.${id}`, {
+      method: 'PATCH', headers: { ...H, 'Prefer': 'return=representation' },
+      body: JSON.stringify(data)
+    });
+    if (!r.ok) throw new Error(await r.text());
+    return r.json();
+  }
+
+  const fmt = n => '₱' + Number(n || 0).toLocaleString('en-PH', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+  const todayStr = () => new Date().toISOString().split('T')[0];
+  const todayLabel = () => new Date().toLocaleDateString('en-US', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+
+  let _branches = [], _therapists = [], _services = [];
+
+  // Cache lookup helpers
+  const branchName = id => _branches.find(b => b.id === id)?.name || '—';
+  const therapistName = id => _therapists.find(t => t.id === id)?.full_name || '—';
+  const serviceName = id => _services.find(s => s.id === id)?.name || '—';
+
+  function showError(msg) {
+    const el = document.getElementById('error-banner');
+    el.textContent = '⚠ ' + msg;
+    el.style.display = 'block';
+    setTimeout(() => el.style.display = 'none', 6000);
+  }
+
+  function filterTable(input, tbodyId) {
+    const val = input.value.toLowerCase();
+    document.querySelectorAll('#' + tbodyId + ' tr').forEach(r => {
+      r.style.display = r.textContent.toLowerCase().includes(val) ? '' : 'none';
+    });
+  }
+
+  function statusBadge(s) {
+    if (s === 'open')     return '<span class="badge badge-green">● Open</span>';
+    if (s === 'on_break') return '<span class="badge badge-amber">● On Break</span>';
+    if (s === 'closed')   return '<span class="badge badge-red">● Closed</span>';
+    return '<span class="badge badge-muted">' + s + '</span>';
+  }
+
+  function initials(name) {
+    return (name || '?').split(/[\s–-]+/).map(w => w[0]).join('').toUpperCase().slice(0,2);
+  }
+
+  // ── Populate branch dropdowns ────────────────────────────────
+  function populateDropdowns() {
+    const ids = ['commissions-branch-filter','sales-branch-filter','expenses-branch-filter','log-branch-filter'];
+    _branches.forEach(b => {
+      ids.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.insertAdjacentHTML('beforeend', `<option value="${b.id}">${b.name}</option>`);
+      });
+    });
+  }
+
+  // ── BRANCH LIST ──────────────────────────────────────────────
+  async function loadBranchList() {
+    try {
+      [_branches, _therapists, _services] = await Promise.all([
+        db('branches', '?select=*&order=name'),
+        db('therapists', '?select=*'),
+        db('services', '?select=*')
+      ]);
+      populateDropdowns();
+
+      document.getElementById('branch-count').textContent = _branches.length + ' Branches';
+      const tbody = document.getElementById('branch-tbody');
+      if (!_branches.length) { tbody.innerHTML = '<tr class="loading-row"><td colspan="6">No branches found.</td></tr>'; return; }
+
+      tbody.innerHTML = _branches.map(b => {
+        const count = _therapists.filter(t => t.branch_id === b.id && t.status === 'active').length;
+        return `<tr>
+          <td><div style="display:flex;align-items:center;gap:10px">
+            <div class="branch-initials">${initials(b.name)}</div>
+            <span style="font-weight:500">${b.name}</span>
+          </div></td>
+          <td style="color:var(--muted)">${b.location}</td>
+          <td>${b.manager_name || '—'}</td>
+          <td><span class="badge badge-blue">${count} therapist${count !== 1 ? 's' : ''}</span></td>
+          <td>${statusBadge(b.status)}</td>
+          <td><button class="btn btn-sm" onclick="editBranchStatus('${b.id}','${b.status}','${b.name}')">Edit Status</button></td>
+        </tr>`;
+      }).join('');
+    } catch (e) { showError('Branch list: ' + e.message); }
+  }
+
+  function openAddBranch() {
+    const name     = prompt('Branch name:');
+    if (!name) return;
+    const location = prompt('Location (City, Province):');
+    if (!location) return;
+    const manager  = prompt('Manager name:');
+    dbInsert('branches', { name, location, manager_name: manager, status: 'open' })
+      .then(() => loadBranchList())
+      .catch(e => showError('Could not add branch: ' + e.message));
+  }
+
+  function editBranchStatus(id, current, name) {
+    const options = ['open', 'on_break', 'closed'];
+    const choice  = prompt(`Change status for "${name}"?\nOptions: open, on_break, closed\nCurrent: ${current}`);
+    if (!choice || !options.includes(choice)) return;
+    dbUpdate('branches', id, { status: choice })
+      .then(() => loadBranchList())
+      .catch(e => showError('Update failed: ' + e.message));
+  }
+
+  // ── DAILY COMMISSIONS ────────────────────────────────────────
+  async function loadCommissions() {
+    document.getElementById('commissions-date').textContent = 'Commission records for ' + todayLabel() + '.';
+    const branchId = document.getElementById('commissions-branch-filter').value;
+    let params = `?select=*&commission_date=eq.${todayStr()}&order=created_at.desc`;
+    if (branchId) params += `&branch_id=eq.${branchId}`;
+
+    try {
+      const rows = await db('commissions', params);
+      const total   = rows.reduce((s, r) => s + Number(r.total_amount), 0);
+      const paid    = rows.filter(r => r.status === 'paid').length;
+      const pending = rows.filter(r => r.status === 'pending').length;
+
+      document.getElementById('comm-total').textContent   = fmt(total);
+      document.getElementById('comm-count').textContent   = rows.length;
+      document.getElementById('comm-paid').textContent    = paid;
+      document.getElementById('comm-pending').textContent = pending;
+      document.getElementById('comm-sub').textContent     = rows.length + ' records today';
+
+      const tbody = document.getElementById('commissions-tbody');
+      if (!rows.length) { tbody.innerHTML = '<tr class="loading-row"><td colspan="6">No commission records for today.</td></tr>'; return; }
+
+      tbody.innerHTML = rows.map(r => `<tr>
+        <td style="font-weight:500">${therapistName(r.therapist_id)}</td>
+        <td style="color:var(--muted)">${branchName(r.branch_id)}</td>
+        <td>${r.sessions_count}</td>
+        <td>${fmt(r.rate_per_session)}/session</td>
+        <td style="font-family:'DM Mono',monospace;font-weight:500">${fmt(r.total_amount)}</td>
+        <td>${r.status === 'paid'
+          ? '<span class="badge badge-green">Paid</span>'
+          : `<span class="badge badge-amber">Pending</span> <button class="btn btn-sm" style="margin-left:6px" onclick="markCommissionPaid('${r.id}')">Mark Paid</button>`
+        }</td>
+      </tr>`).join('');
+    } catch (e) { showError('Commissions: ' + e.message); }
+  }
+
+  async function markCommissionPaid(id) {
+    try {
+      await dbUpdate('commissions', id, { status: 'paid' });
+      loadCommissions();
+    } catch (e) { showError('Could not update: ' + e.message); }
+  }
+
+  // ── DAILY SALES ──────────────────────────────────────────────
+  async function loadSales() {
+    document.getElementById('sales-date').textContent = 'Sales transactions for ' + todayLabel() + '.';
+    const branchId = document.getElementById('sales-branch-filter').value;
+    let params = `?select=*&transaction_at=gte.${todayStr()}T00:00:00&transaction_at=lt.${todayStr()}T23:59:59&order=transaction_at.desc`;
+    if (branchId) params += `&branch_id=eq.${branchId}`;
+
+    try {
+      const rows = await db('sales', params);
+      const total = rows.reduce((s, r) => s + Number(r.amount), 0);
+      const avg   = rows.length ? total / rows.length : 0;
+
+      // Top branch
+      const branchTotals = {};
+      rows.forEach(r => { branchTotals[r.branch_id] = (branchTotals[r.branch_id] || 0) + Number(r.amount); });
+      const topBranchId  = Object.entries(branchTotals).sort((a,b) => b[1]-a[1])[0];
+
+      document.getElementById('sales-total').textContent = fmt(total);
+      document.getElementById('sales-count').textContent = rows.length;
+      document.getElementById('sales-avg').textContent   = fmt(avg);
+      document.getElementById('sales-top').textContent   = topBranchId ? branchName(topBranchId[0]) : '—';
+      document.getElementById('sales-sub').textContent   = rows.length + ' transactions today';
+      document.getElementById('sales-top-sub').textContent = topBranchId ? fmt(topBranchId[1]) + ' in sales' : '';
+
+      const payBadge = m => {
+        if (m === 'gcash') return '<span class="badge badge-blue">GCash</span>';
+        if (m === 'maya')  return '<span class="badge badge-green">Maya</span>';
+        if (m === 'card')  return '<span class="badge badge-blue">Card</span>';
+        return '<span class="badge badge-muted">Cash</span>';
+      };
+
+      const tbody = document.getElementById('sales-tbody');
+      if (!rows.length) { tbody.innerHTML = '<tr class="loading-row"><td colspan="6">No sales recorded today.</td></tr>'; return; }
+
+      tbody.innerHTML = rows.map(r => {
+        const t = new Date(r.transaction_at);
+        const time = t.toLocaleTimeString('en-US', { hour:'numeric', minute:'2-digit' });
+        return `<tr>
+          <td style="color:var(--muted);font-size:12.5px">${time}</td>
+          <td style="color:var(--muted)">${branchName(r.branch_id)}</td>
+          <td>${serviceName(r.service_id)}</td>
+          <td>${therapistName(r.therapist_id)}</td>
+          <td style="font-family:'DM Mono',monospace;font-weight:500">${fmt(r.amount)}</td>
+          <td>${payBadge(r.payment_method)}</td>
+        </tr>`;
+      }).join('');
+    } catch (e) { showError('Sales: ' + e.message); }
+  }
+
+  // ── DAILY EXPENSES ───────────────────────────────────────────
+  async function loadExpenses() {
+    document.getElementById('expenses-date').textContent = 'Expenses for ' + todayLabel() + '.';
+    const branchId = document.getElementById('expenses-branch-filter').value;
+    let params = `?select=*&expense_date=eq.${todayStr()}&order=created_at.desc`;
+    if (branchId) params += `&branch_id=eq.${branchId}`;
+
+    try {
+      const rows = await db('expenses', params);
+      const total    = rows.reduce((s, r) => s + Number(r.amount), 0);
+      const approved = rows.filter(r => r.status === 'approved').length;
+      const pending  = rows.filter(r => r.status === 'pending').length;
+
+      // Top category
+      const catTotals = {};
+      rows.forEach(r => { catTotals[r.category] = (catTotals[r.category] || 0) + Number(r.amount); });
+      const topCat = Object.entries(catTotals).sort((a,b) => b[1]-a[1])[0];
+
+      document.getElementById('exp-total').textContent       = fmt(total);
+      document.getElementById('exp-count').textContent       = rows.length;
+      document.getElementById('exp-approved').textContent    = approved;
+      document.getElementById('exp-top-cat').textContent     = topCat ? topCat[0].charAt(0).toUpperCase() + topCat[0].slice(1) : '—';
+      document.getElementById('exp-sub').textContent         = rows.length + ' items today';
+      document.getElementById('exp-pending-sub').textContent = pending + ' pending approval';
+      document.getElementById('exp-top-cat-sub').textContent = topCat ? fmt(topCat[1]) + ' today' : '';
+
+      const tbody = document.getElementById('expenses-tbody');
+      if (!rows.length) { tbody.innerHTML = '<tr class="loading-row"><td colspan="7">No expenses logged today.</td></tr>'; return; }
+
+      tbody.innerHTML = rows.map(r => `<tr>
+        <td style="color:var(--muted);font-size:12.5px">${r.expense_date}</td>
+        <td style="color:var(--muted)">${branchName(r.branch_id)}</td>
+        <td style="text-transform:capitalize">${r.category}</td>
+        <td>${r.description}</td>
+        <td style="font-family:'DM Mono',monospace;font-weight:500">${fmt(r.amount)}</td>
+        <td>${r.status === 'approved'
+          ? '<span class="badge badge-green">Approved</span>'
+          : r.status === 'rejected'
+          ? '<span class="badge badge-red">Rejected</span>'
+          : '<span class="badge badge-amber">Pending</span>'
+        }</td>
+        <td>${r.status === 'pending'
+          ? `<button class="btn btn-sm" onclick="approveExpense('${r.id}')">Approve</button>`
+          : ''
+        }</td>
+      </tr>`).join('');
+    } catch (e) { showError('Expenses: ' + e.message); }
+  }
+
+  function openAddExpense() {
+    if (!_branches.length) { showError('Branches not loaded yet.'); return; }
+    const branchList = _branches.map((b,i) => `${i+1}. ${b.name}`).join('\n');
+    const bIdx = parseInt(prompt('Select branch number:\n' + branchList)) - 1;
+    if (isNaN(bIdx) || !_branches[bIdx]) return;
+    const category    = prompt('Category (supplies/utilities/maintenance/food/payroll/rent/other):');
+    if (!category) return;
+    const description = prompt('Description:');
+    if (!description) return;
+    const amount      = parseFloat(prompt('Amount (₱):'));
+    if (isNaN(amount)) return;
+    const submittedBy = prompt('Submitted by:') || 'Admin';
+    dbInsert('expenses', { branch_id: _branches[bIdx].id, category, description, amount, submitted_by: submittedBy, expense_date: todayStr() })
+      .then(() => loadExpenses())
+      .catch(e => showError('Could not log expense: ' + e.message));
+  }
+
+  async function approveExpense(id) {
+    try { await dbUpdate('expenses', id, { status: 'approved', approved_by: 'Jerome' }); loadExpenses(); }
+    catch (e) { showError('Approval failed: ' + e.message); }
+  }
+
+  // ── MONITORING ───────────────────────────────────────────────
+  async function loadMonitoring() {
+    const grid = document.getElementById('monitor-grid');
+    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--muted)"><span class="spinner"></span> Loading…</div>';
+    try {
+      const [sales, expenses, therapists] = await Promise.all([
+        db('sales', `?select=amount,branch_id&transaction_at=gte.${todayStr()}T00:00:00`),
+        db('expenses', `?select=amount,branch_id&expense_date=eq.${todayStr()}`),
+        db('therapists', `?select=id,status,branch_id`)
+      ]);
+
+      grid.innerHTML = _branches.map(b => {
+        const bSales    = sales.filter(s => s.branch_id === b.id).reduce((s,r) => s+Number(r.amount), 0);
+        const bExp      = expenses.filter(e => e.branch_id === b.id).reduce((s,r) => s+Number(r.amount), 0);
+        const bTherapists = therapists.filter(t => t.branch_id === b.id);
+        const active    = bTherapists.filter(t => t.status === 'active').length;
+        const total     = bTherapists.length;
+        const occupancy = total ? Math.round((active / total) * 100) : 0;
+        const barColor  = occupancy >= 80 ? 'var(--green)' : occupancy >= 50 ? 'var(--accent)' : occupancy > 0 ? 'var(--amber)' : 'var(--red)';
+
+        return `<div class="monitor-card">
+          <div class="monitor-card-header">
+            <div><div class="monitor-branch-name">${b.name}</div><div style="font-size:12px;color:var(--muted)">${b.location}</div></div>
+            ${statusBadge(b.status)}
+          </div>
+          <div class="monitor-row"><span class="monitor-label">Therapists</span><span class="monitor-val">${active} / ${total}</span></div>
+          <div class="monitor-row"><span class="monitor-label">Revenue today</span><span class="monitor-val">${fmt(bSales)}</span></div>
+          <div class="monitor-row"><span class="monitor-label">Expenses today</span><span class="monitor-val">${fmt(bExp)}</span></div>
+          <div class="monitor-row"><span class="monitor-label">Net</span><span class="monitor-val" style="color:${bSales-bExp >= 0 ? 'var(--green)' : 'var(--red)'}">${fmt(bSales - bExp)}</span></div>
+          <div class="progress-bar"><div class="progress-fill" style="width:${occupancy}%;background:${barColor}"></div></div>
+        </div>`;
+      }).join('');
+    } catch (e) { showError('Monitoring: ' + e.message); }
+  }
+
+  // ── BRANCH PERFORMANCE ───────────────────────────────────────
+  let perfChartsInited = false;
+  async function loadBranchPerformance() {
+    try {
+      const [sales, expenses] = await Promise.all([
+        db('sales', `?select=amount,branch_id&transaction_at=gte.${todayStr()}T00:00:00`),
+        db('expenses', `?select=amount,branch_id&expense_date=eq.${todayStr()}`)
+      ]);
+
+      const branchRevenue  = _branches.map(b => sales.filter(s => s.branch_id === b.id).reduce((s,r) => s+Number(r.amount), 0));
+      const branchExpenses = _branches.map(b => expenses.filter(e => e.branch_id === b.id).reduce((s,r) => s+Number(r.amount), 0));
+      const branchTxns     = _branches.map(b => sales.filter(s => s.branch_id === b.id).length);
+      const totalRevenue   = branchRevenue.reduce((s,v) => s+v, 0);
+      const openBranches   = _branches.filter(b => b.status === 'open').length;
+
+      const bestIdx = branchRevenue.indexOf(Math.max(...branchRevenue));
+      const mostTxnIdx = branchTxns.indexOf(Math.max(...branchTxns));
+
+      document.getElementById('perf-best').textContent     = _branches[bestIdx]?.name || '—';
+      document.getElementById('perf-best-sub').textContent = fmt(branchRevenue[bestIdx] || 0) + ' today';
+      document.getElementById('perf-txn').textContent      = _branches[mostTxnIdx]?.name || '—';
+      document.getElementById('perf-txn-sub').textContent  = branchTxns[mostTxnIdx] + ' transactions';
+      document.getElementById('perf-total').textContent    = fmt(totalRevenue);
+      document.getElementById('perf-open').textContent     = openBranches;
+      document.getElementById('perf-open-sub').textContent = 'Out of ' + _branches.length + ' total';
+
+      // Scorecard
+      document.getElementById('scorecard-tbody').innerHTML = _branches.map((b,i) => {
+        const net = branchRevenue[i] - branchExpenses[i];
+        return `<tr>
+          <td style="font-weight:500">${b.name}</td>
+          <td>${branchTxns[i]}</td>
+          <td style="font-family:'DM Mono',monospace">${fmt(branchRevenue[i])}</td>
+          <td style="font-family:'DM Mono',monospace;color:var(--red)">${fmt(branchExpenses[i])}</td>
+          <td style="font-family:'DM Mono',monospace;color:${net >= 0 ? 'var(--green)' : 'var(--red)'}">${fmt(net)}</td>
+          <td>${statusBadge(b.status)}</td>
+        </tr>`;
+      }).join('');
+
+      // Charts (only init once)
+      if (!perfChartsInited) {
+        perfChartsInited = true;
+        const labels = _branches.map(b => b.name);
+        new Chart(document.getElementById('perfRevenueChart'), {
+          type: 'bar', indexAxis: 'y',
+          data: { labels, datasets: [{ data: branchRevenue, backgroundColor: '#2563eb', borderRadius: 4 }] },
+          options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
+            scales: { x: { ticks: { callback: v => '₱'+(v/1000).toFixed(0)+'k', font: { family:'DM Sans', size:11 }, color:'#6b6b67' }, grid: { color:'rgba(0,0,0,0.05)' } },
+              y: { grid: { display:false }, ticks: { font: { family:'DM Sans', size:11 }, color:'#6b6b67' } } } }
+        });
+        new Chart(document.getElementById('perfExpensesChart'), {
+          type: 'bar', indexAxis: 'y',
+          data: { labels, datasets: [{ data: branchExpenses, backgroundColor: '#dc2626', borderRadius: 4 }] },
+          options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
+            scales: { x: { ticks: { callback: v => '₱'+(v/1000).toFixed(0)+'k', font: { family:'DM Sans', size:11 }, color:'#6b6b67' }, grid: { color:'rgba(0,0,0,0.05)' } },
+              y: { grid: { display:false }, ticks: { font: { family:'DM Sans', size:11 }, color:'#6b6b67' } } } }
+        });
+      }
+    } catch (e) { showError('Performance: ' + e.message); }
+  }
+
+  // ── ACTIVITY LOG ─────────────────────────────────────────────
+  async function loadActivityLog() {
+    const branchId = document.getElementById('log-branch-filter').value;
+    const type     = document.getElementById('log-type-filter').value;
+    let params = `?select=*&order=created_at.desc&limit=50`;
+    if (branchId) params += `&branch_id=eq.${branchId}`;
+    if (type)     params += `&event_type=eq.${type}`;
+
+    try {
+      const rows = await db('activity_log', params);
+      const list = document.getElementById('activity-list');
+
+      if (!rows.length) {
+        list.innerHTML = '<div style="text-align:center;padding:40px;color:var(--muted)">No activity recorded yet.</div>';
+        return;
+      }
+
+      const dotColor = { sale:'dot-green', expense:'dot-amber', staff:'dot-blue', system:'dot-blue', branch:'dot-red' };
+      list.innerHTML = rows.map(r => {
+        const t    = new Date(r.created_at);
+        const time = t.toLocaleTimeString('en-US', { hour:'numeric', minute:'2-digit' });
+        const date = t.toLocaleDateString('en-US', { month:'short', day:'numeric' });
+        return `<div class="activity-item">
+          <div class="activity-dot ${dotColor[r.event_type] || 'dot-blue'}"></div>
+          <div style="flex:1">
+            <div class="activity-text">${r.description}</div>
+            <div class="activity-branch">${branchName(r.branch_id)}${r.performed_by ? ' · ' + r.performed_by : ''}</div>
+          </div>
+          <div class="activity-time">${date} ${time}</div>
+        </div>`;
+      }).join('');
+    } catch (e) { showError('Activity log: ' + e.message); }
+  }
+
+  // ── Navigation ───────────────────────────────────────────────
+  const pageLoaders = {
+    'branch-list':        () => loadBranchList(),
+    'daily-commissions':  () => loadCommissions(),
+    'daily-sales':        () => loadSales(),
+    'daily-expenses':     () => loadExpenses(),
+    'monitoring':         () => loadMonitoring(),
+    'branch-performance': () => loadBranchPerformance(),
+    'activity-log':       () => loadActivityLog(),
   };
 
+  const pageLabels = {
+    'branch-list':        'Branch List',
+    'daily-commissions':  'Daily Operations › Daily Commissions',
+    'daily-sales':        'Daily Operations › Daily Sales',
+    'daily-expenses':     'Daily Operations › Daily Expenses',
+    'monitoring':         'Daily Operations › Monitoring',
+    'branch-performance': 'Daily Operations › Branch Performance',
+    'activity-log':       'Daily Operations › Branch Activity Log',
+  };
+
+  const dailyOpsPages = ['daily-commissions','daily-sales','daily-expenses','monitoring','branch-performance','activity-log'];
+
   function showPage(id, navEl) {
-    // hide all pages
     document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     document.getElementById('page-' + id).classList.add('active');
-
-    // update topbar
-    document.getElementById('topbar-label').textContent = pages[id]?.breadcrumb || id;
-
-    // update nav highlights
+    document.getElementById('topbar-label').textContent = pageLabels[id] || id;
     document.querySelectorAll('.nav-sub-item, .nav-sub-sub-item').forEach(el => el.classList.remove('active'));
     if (navEl) navEl.classList.add('active');
-
-    // if daily ops subpage, also highlight parent
-    const dailyOpsPages = ['daily-commissions','daily-sales','daily-expenses','monitoring','branch-performance','activity-log'];
     if (dailyOpsPages.includes(id)) {
-      document.getElementById('nav-daily-ops').classList.add('active');
       document.getElementById('daily-ops-sub').style.display = 'block';
       document.getElementById('ops-chevron').classList.add('open');
     }
-
-    // draw charts if needed
-    if (id === 'daily-sales') initSalesCharts();
-    if (id === 'branch-performance') initPerfCharts();
+    if (pageLoaders[id]) pageLoaders[id]();
   }
 
   function toggleNav(el) {
@@ -978,75 +879,16 @@
     if (chevron) chevron.classList.toggle('open', !isOpen);
   }
 
-  function toggleDailyOps(el) {
-    const sub = document.getElementById('daily-ops-sub');
+  function toggleDailyOps() {
+    const sub     = document.getElementById('daily-ops-sub');
     const chevron = document.getElementById('ops-chevron');
-    const isOpen = sub.style.display !== 'none';
+    const isOpen  = sub.style.display !== 'none';
     sub.style.display = isOpen ? 'none' : 'block';
     chevron.classList.toggle('open', !isOpen);
   }
 
-  // ── Search filter ──
-  function filterTable(input, tableId) {
-    const val = input.value.toLowerCase();
-    document.querySelectorAll('#' + tableId + ' tbody tr').forEach(row => {
-      row.style.display = row.textContent.toLowerCase().includes(val) ? '' : 'none';
-    });
-  }
-
-  // ── Charts ──
-  const branches = ['Butuan M.', 'Butuan 2', 'Ayala C.', 'Patria C.', 'Limketkai', 'City Leg.', 'GMALL T.', 'City P.'];
-  let salesChartsInit = false, perfChartsInit = false;
-
-  function initSalesCharts() {
-    if (salesChartsInit) return;
-    salesChartsInit = true;
-    new Chart(document.getElementById('salesByBranch'), {
-      type: 'bar',
-      data: {
-        labels: branches,
-        datasets: [{ label: 'Sales', data: [7800, 6200, 9200, 5400, 3200, 4600, 6800, 0], backgroundColor: '#2563eb', borderRadius: 4 }]
-      },
-      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
-        scales: { x: { grid: { display: false }, ticks: { font: { family: 'DM Sans', size: 11 }, color: '#6b6b67' } },
-          y: { grid: { color: 'rgba(0,0,0,0.05)' }, ticks: { font: { family: 'DM Sans', size: 11 }, color: '#6b6b67', callback: v => '₱'+(v/1000)+'k' } } } }
-    });
-    new Chart(document.getElementById('hourlySales'), {
-      type: 'line',
-      data: {
-        labels: ['8am','9am','10am','11am','12pm','1pm','2pm','3pm','4pm','5pm'],
-        datasets: [{ label: 'Sales', data: [800, 2200, 5400, 7800, 9200, 7600, 6800, 5400, 4200, 3300], borderColor: '#16a34a', backgroundColor: 'rgba(22,163,74,.07)', borderWidth: 2, tension: .4, fill: true, pointRadius: 3, pointBackgroundColor: '#16a34a', pointBorderColor: '#fff', pointBorderWidth: 2 }]
-      },
-      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
-        scales: { x: { grid: { display: false }, ticks: { font: { family: 'DM Sans', size: 11 }, color: '#6b6b67' } },
-          y: { grid: { color: 'rgba(0,0,0,0.05)' }, ticks: { font: { family: 'DM Sans', size: 11 }, color: '#6b6b67', callback: v => '₱'+(v/1000)+'k' } } } }
-    });
-  }
-
-  function initPerfCharts() {
-    if (perfChartsInit) return;
-    perfChartsInit = true;
-    new Chart(document.getElementById('perfRevenue'), {
-      type: 'bar', indexAxis: 'y',
-      data: {
-        labels: branches,
-        datasets: [{ label: 'Revenue', data: [7800,6200,9200,5400,3200,4600,6800,0], backgroundColor: ['#2563eb','#2563eb','#16a34a','#2563eb','#d97706','#2563eb','#2563eb','#dc2626'], borderRadius: 4 }]
-      },
-      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
-        scales: { x: { grid: { color: 'rgba(0,0,0,0.05)' }, ticks: { font: { family: 'DM Sans', size: 11 }, color: '#6b6b67', callback: v => '₱'+(v/1000)+'k' } },
-          y: { grid: { display: false }, ticks: { font: { family: 'DM Sans', size: 11 }, color: '#6b6b67' } } } }
-    });
-    new Chart(document.getElementById('perfSessions'), {
-      type: 'bar', indexAxis: 'y',
-      data: {
-        labels: branches,
-        datasets: [{ label: 'Sessions', data: [32,26,41,22,14,18,24,0], backgroundColor: '#eff6ff', borderColor: '#2563eb', borderWidth: 1.5, borderRadius: 4 }]
-      },
-      options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
-        scales: { x: { grid: { color: 'rgba(0,0,0,0.05)' }, ticks: { font: { family: 'DM Sans', size: 11 }, color: '#6b6b67' } },
-          y: { grid: { display: false }, ticks: { font: { family: 'DM Sans', size: 11 }, color: '#6b6b67' } } } }
-    });
-  }
+  // ── Init ─────────────────────────────────────────────────────
+  loadBranchList();
 </script>
 </body>
 </html>
