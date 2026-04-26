@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lopez Wellness Inc. – Expenses</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap');
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #f5f5f4; --surface: #ffffff; --border: #e5e5e3;
+    --text: #1a1a18; --muted: #6b6b67; --accent: #2563eb; --accent-light: #eff6ff;
+    --green: #16a34a; --green-light: #dcfce7; --red: #dc2626; --red-light: #fee2e2;
+    --amber: #d97706; --amber-light: #fef3c7; --radius: 12px; --radius-sm: 8px;
+  }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); display: flex; min-height: 100vh; font-size: 14px; }
+
+  /* Main */
+  .main { flex: 1; display: flex; flex-direction: column; }
+  .topbar { background: var(--surface); border-bottom: 1px solid var(--border); padding: 14px 32px; display: flex; align-items: center; gap: 8px; font-size: 13.5px; color: var(--muted); }
+  .topbar-sep { color: var(--border); }
+  .topbar-current { color: var(--text); font-weight: 500; }
+  .content { padding: 32px; flex: 1; }
+  .page-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 28px; }
+  .page-title { font-size: 26px; font-weight: 600; letter-spacing: -.5px; }
+  .page-subtitle { color: var(--muted); font-size: 13.5px; margin-top: 4px; }
+  .header-actions { display: flex; gap: 10px; align-items: center; }
+
+  /* Buttons */
+  .btn { display: inline-flex; align-items: center; gap: 6px; padding: 9px 16px; border-radius: var(--radius-sm); font-family: inherit; font-size: 13.5px; font-weight: 500; cursor: pointer; border: 1px solid var(--border); background: var(--surface); color: var(--text); transition: background .15s; white-space: nowrap; }
+  .btn:hover { background: var(--bg); }
+  .btn-primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn-primary:hover { background: #1d4ed8; }
+  .btn-danger { background: var(--red); color: #fff; border-color: var(--red); }
+  .btn-danger:hover { background: #b91c1c; }
+  .btn-sm { padding: 6px 12px; font-size: 12.5px; }
+  .btn-group { display: flex; border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; }
+  .btn-group .btn { border: none; border-radius: 0; border-right: 1px solid var(--border); }
+  .btn-group .btn:last-child { border-right: none; }
+  .btn-group .btn.active { background: var(--accent); color: #fff; }
+
+  /* Badges */
+  .badge { display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 20px; font-size: 12px; font-weight: 500; }
+  .badge-green { background: var(--green-light); color: var(--green); }
+  .badge-red { background: var(--red-light); color: var(--red); }
+  .badge-amber { background: var(--amber-light); color: var(--amber); }
+  .badge-blue { background: var(--accent-light); color: var(--accent); }
+  .badge-muted { background: var(--bg); color: var(--muted); border: 1px solid var(--border); }
+
+  /* Metric cards */
+  .metric-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
+  .metric-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 22px 18px; }
+  .metric-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+  .metric-label { font-size: 12.5px; color: var(--muted); }
+  .metric-icon { display: flex; align-items: center; justify-content: center; }
+  .metric-value { font-size: 24px; font-weight: 600; letter-spacing: -.5px; font-family: 'DM Mono', monospace; margin-bottom: 6px; min-height: 32px; }
+  .metric-sub { font-size: 12px; color: var(--muted); }
+
+  /* Chart */
+  .chart-row { display: grid; grid-template-columns: 1.6fr 1fr; gap: 16px; margin-bottom: 24px; }
+  .chart-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px 24px; }
+  .chart-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+  .chart-subtitle { font-size: 12.5px; color: var(--muted); margin-bottom: 18px; }
+
+  /* Card & table */
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin-bottom: 24px; }
+  .card-header { padding: 18px 22px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .card-title { font-size: 14px; font-weight: 600; }
+  .search-box { display: flex; align-items: center; gap: 8px; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 7px 12px; width: 220px; }
+  .search-box input { background: none; border: none; outline: none; font-family: inherit; font-size: 13px; color: var(--text); width: 100%; }
+  .search-box input::placeholder { color: var(--muted); }
+  table { width: 100%; border-collapse: collapse; }
+  thead th { text-align: left; padding: 11px 22px; font-size: 12px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; background: var(--bg); border-bottom: 1px solid var(--border); }
+  tbody tr { border-bottom: 1px solid var(--border); transition: background .12s; }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: #fafaf9; }
+  tbody td { padding: 14px 22px; font-size: 13.5px; vertical-align: middle; }
+
+  /* Filters */
+  .filter-bar { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  .filter-select { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 7px 12px; font-family: inherit; font-size: 13px; color: var(--text); cursor: pointer; }
+
+  /* Loading / Error */
+  .spinner { display: inline-block; width: 14px; height: 14px; border: 2px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin .7s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .loading-row td { text-align: center; color: var(--muted); padding: 30px !important; }
+  .error-banner { background: var(--red-light); color: var(--red); padding: 12px 18px; border-radius: var(--radius-sm); font-size: 13px; margin-bottom: 20px; display: none; }
+</style>
+</head>
+<body id="expenses">
+
+<!-- ══ SIDEBAR ══ -->
+<div id="sidebar-root"></div>
+
+<!-- ══ MAIN ══ -->
+<main class="main">
+  <div class="topbar">
+    <span>Operations</span>
+    <span class="topbar-sep">›</span>
+    <span class="topbar-current">Expenses</span>
+  </div>
+
+  <div class="content">
+    <div id="error-banner" class="error-banner"></div>
+
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">Expenses</h1>
+        <p class="page-subtitle" id="page-subtitle">Loading…</p>
+      </div>
+      <div class="header-actions">
+        <div class="btn-group">
+          <button class="btn active" id="range-today"  onclick="setRange('today')">Today</button>
+          <button class="btn"        id="range-7days"  onclick="setRange('7days')">7 Days</button>
+          <button class="btn"        id="range-30days" onclick="setRange('30days')">30 Days</button>
+        </div>
+        <button class="btn btn-primary" onclick="openLogExpense()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Log Expense
+        </button>
+        <button class="btn" onclick="exportCSV()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Export CSV
+        </button>
+      </div>
+    </div>
+
+    <!-- Metric Cards -->
+    <div class="metric-grid">
+      <div class="metric-card">
+        <div class="metric-header">
+          <span class="metric-label">Total Expenses</span>
+          <div class="metric-icon" style="color:var(--red)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+        </div>
+        <div class="metric-value" id="metric-total"><span class="spinner"></span></div>
+        <div class="metric-sub" id="metric-total-sub"></div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-header">
+          <span class="metric-label">Approved</span>
+          <div class="metric-icon" style="color:var(--green)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+        </div>
+        <div class="metric-value" id="metric-approved"><span class="spinner"></span></div>
+        <div class="metric-sub" id="metric-approved-sub"></div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-header">
+          <span class="metric-label">Pending Approval</span>
+          <div class="metric-icon" style="color:var(--amber)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          </div>
+        </div>
+        <div class="metric-value" id="metric-pending"><span class="spinner"></span></div>
+        <div class="metric-sub" id="metric-pending-sub"></div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-header">
+          <span class="metric-label">Top Category</span>
+          <div class="metric-icon" style="color:var(--accent)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          </div>
+        </div>
+        <div class="metric-value" id="metric-top-cat" style="font-size:16px;line-height:1.4"><span class="spinner"></span></div>
+        <div class="metric-sub" id="metric-top-cat-sub"></div>
+      </div>
+    </div>
+
+    <!-- Charts -->
+    <div class="chart-row">
+      <div class="chart-card">
+        <div class="chart-title">Expense Trend</div>
+        <div class="chart-subtitle" id="chart-subtitle">Daily expenses over the selected period</div>
+        <div style="height:200px;position:relative">
+          <canvas id="trendChart"></canvas>
+        </div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">By Category</div>
+        <div class="chart-subtitle">Breakdown of expenses by type</div>
+        <div style="height:200px;position:relative">
+          <canvas id="categoryChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Expenses Table -->
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title" id="table-count">Expenses</span>
+        <div class="filter-bar">
+          <select class="filter-select" id="branch-filter" onchange="applyFilters()">
+            <option value="">All Branches</option>
+          </select>
+          <select class="filter-select" id="category-filter" onchange="applyFilters()">
+            <option value="">All Categories</option>
+            <option value="supplies">Supplies</option>
+            <option value="utilities">Utilities</option>
+            <option value="maintenance">Maintenance</option>
+            <option value="food">Food</option>
+            <option value="payroll">Payroll</option>
+            <option value="rent">Rent</option>
+            <option value="other">Other</option>
+          </select>
+          <select class="filter-select" id="status-filter" onchange="applyFilters()">
+            <option value="">All Statuses</option>
+            <option value="approved">Approved</option>
+            <option value="pending">Pending</option>
+            <option value="rejected">Rejected</option>
+          </select>
+          <div class="search-box">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" id="search-input" placeholder="Search expenses…" oninput="applyFilters()">
+          </div>
+        </div>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Branch</th>
+            <th>Category</th>
+            <th>Description</th>
+            <th>Submitted By</th>
+            <th>Amount</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="expenses-tbody">
+          <tr class="loading-row"><td colspan="8"><span class="spinner"></span> Loading…</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</main>
+
+<script>
+  const SUPABASE_URL = 'https://bzizemhbfisbjrllyqfu.supabase.co';
+  const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ6aXplbWhiZmlzYmpybGx5cWZ1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzAxNTA4NzksImV4cCI6MjA4NTcyNjg3OX0.6K7B5reuK2b9YJO0CqtJH_VB8GLUa9aKvlb4fboVB-s';
+  const H = { 'apikey': SUPABASE_KEY, 'Authorization': 'Bearer ' + SUPABASE_KEY, 'Content-Type': 'application/json' };
+
+  async function db(table, params = '') {
+    const r = await fetch(`${SUPABASE_URL}/rest/v1/${table}${params}`, { headers: H });
+    if (!r.ok) throw new Error(`${table} ${r.status}`);
+    return r.json();
+  }
+
+  async function dbInsert(table, data) {
+    const r = await fetch(`${SUPABASE_URL}/rest/v1/${table}`, {
+      method: 'POST', headers: { ...H, 'Prefer': 'return=representation' },
+      body: JSON.stringify(data)
+    });
+    if (!r.ok) throw new Error(await r.text());
+    return r.json();
+  }
+
+  async function dbUpdate(table, id, data) {
+    const r = await fetch(`${SUPABASE_URL}/rest/v1/${table}?id=eq.${id}`, {
+      method: 'PATCH', headers: { ...H, 'Prefer': 'return=representation' },
+      body: JSON.stringify(data)
+    });
+    if (!r.ok) throw new Error(await r.text());
+    return r.json();
+  }
+
+  const fmt = n => '₱' + Number(n || 0).toLocaleString('en-PH', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+  const todayStr = () => new Date().toISOString().split('T')[0];
+  const cap = s => s ? s.charAt(0).toUpperCase() + s.slice(1) : '—';
+
+  function showError(msg) {
+    const el = document.getElementById('error-banner');
+    el.textContent = '⚠ ' + msg;
+    el.style.display = 'block';
+    setTimeout(() => el.style.display = 'none', 6000);
+  }
+
+  let _branches = [];
+  let _allExpenses = [];
+  let _currentRange = 'today';
+  let _trendChart = null, _catChart = null;
+
+  const branchName = id => _branches.find(b => b.id === id)?.name || '—';
+
+  function dateRange(range) {
+    const today = new Date();
+    const end   = today.toISOString().split('T')[0];
+    if (range === 'today') return { start: end, end, days: [end] };
+    const days = [];
+    const n = range === '7days' ? 7 : 30;
+    for (let i = n - 1; i >= 0; i--) {
+      const d = new Date(today);
+      d.setDate(d.getDate() - i);
+      days.push(d.toISOString().split('T')[0]);
+    }
+    return { start: days[0], end, days };
+  }
+
+  function setRange(range) {
+    _currentRange = range;
+    ['today', '7days', '30days'].forEach(r => {
+      document.getElementById('range-' + r).classList.toggle('active', r === range);
+    });
+    loadExpenses();
+  }
+
+  const CAT_COLORS = {
+    supplies: '#2563eb', utilities: '#d97706', maintenance: '#7c3aed',
+    food: '#16a34a', payroll: '#dc2626', rent: '#0891b2', other: '#64748b'
+  };
+
+  function renderCharts(days, expenses) {
+    // Trend chart
+    const trendLabels = days.map(d => {
+      const dt = new Date(d + 'T00:00:00');
+      return days.length <= 7
+        ? dt.toLocaleDateString('en-US', { weekday: 'short' })
+        : dt.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+    });
+    const trendData = days.map(day =>
+      expenses.filter(e => e.expense_date === day).reduce((s, r) => s + Number(r.amount), 0)
+    );
+
+    if (_trendChart) _trendChart.destroy();
+    _trendChart = new Chart(document.getElementById('trendChart'), {
+      type: 'bar',
+      data: {
+        labels: trendLabels,
+        datasets: [{ data: trendData, backgroundColor: '#dc2626', borderRadius: 4 }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { grid: { display: false }, ticks: { font: { family: 'DM Sans', size: 11 }, color: '#6b6b67' } },
+          y: { grid: { color: 'rgba(0,0,0,0.05)' }, ticks: { font: { family: 'DM Sans', size: 11 }, color: '#6b6b67', callback: v => '₱' + (v / 1000).toFixed(0) + 'k' } }
+        }
+      }
+    });
+
+    // Category donut chart
+    const catTotals = {};
+    expenses.forEach(e => { catTotals[e.category] = (catTotals[e.category] || 0) + Number(e.amount); });
+    const cats   = Object.keys(catTotals).sort((a, b) => catTotals[b] - catTotals[a]);
+    const colors = cats.map(c => CAT_COLORS[c] || '#94a3b8');
+
+    if (_catChart) _catChart.destroy();
+    if (cats.length) {
+      _catChart = new Chart(document.getElementById('categoryChart'), {
+        type: 'doughnut',
+        data: {
+          labels: cats.map(cap),
+          datasets: [{ data: cats.map(c => catTotals[c]), backgroundColor: colors, borderWidth: 2, borderColor: '#fff' }]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: {
+            legend: { position: 'right', labels: { font: { family: 'DM Sans', size: 11 }, color: '#6b6b67', boxWidth: 10, padding: 12 } }
+          }
+        }
+      });
+    }
+  }
+
+  function statusBadge(s) {
+    if (s === 'approved') return '<span class="badge badge-green">Approved</span>';
+    if (s === 'rejected') return '<span class="badge badge-red">Rejected</span>';
+    return '<span class="badge badge-amber">Pending</span>';
+  }
+
+  function renderTable(expenses) {
+    const tbody = document.getElementById('expenses-tbody');
+    document.getElementById('table-count').textContent =
+      expenses.length.toLocaleString() + ' Expense' + (expenses.length !== 1 ? 's' : '');
+
+    if (!expenses.length) {
+      tbody.innerHTML = '<tr class="loading-row"><td colspan="8">No expenses found.</td></tr>';
+      return;
+    }
+
+    tbody.innerHTML = expenses.map(e => `<tr>
+      <td style="color:var(--muted);font-size:12.5px;white-space:nowrap">${e.expense_date}</td>
+      <td style="color:var(--muted)">${branchName(e.branch_id)}</td>
+      <td style="text-transform:capitalize">${e.category}</td>
+      <td>${e.description}</td>
+      <td style="color:var(--muted)">${e.submitted_by || '—'}</td>
+      <td style="font-family:'DM Mono',monospace;font-weight:500">${fmt(e.amount)}</td>
+      <td>${statusBadge(e.status)}</td>
+      <td>${e.status === 'pending'
+        ? `<button class="btn btn-sm" style="margin-right:4px" onclick="approveExpense('${e.id}')">Approve</button>
+           <button class="btn btn-sm" style="color:var(--red)" onclick="rejectExpense('${e.id}')">Reject</button>`
+        : ''
+      }</td>
+    </tr>`).join('');
+  }
+
+  function applyFilters() {
+    const branchId = document.getElementById('branch-filter').value;
+    const category = document.getElementById('category-filter').value;
+    const status   = document.getElementById('status-filter').value;
+    const search   = document.getElementById('search-input').value.toLowerCase();
+
+    let result = _allExpenses;
+    if (branchId)  result = result.filter(e => e.branch_id === branchId);
+    if (category)  result = result.filter(e => e.category === category);
+    if (status)    result = result.filter(e => e.status === status);
+    if (search)    result = result.filter(e =>
+      (e.description || '').toLowerCase().includes(search) ||
+      (e.category || '').toLowerCase().includes(search) ||
+      branchName(e.branch_id).toLowerCase().includes(search) ||
+      (e.submitted_by || '').toLowerCase().includes(search)
+    );
+
+    renderTable(result);
+  }
+
+  async function loadExpenses() {
+    const { start, end, days } = dateRange(_currentRange);
+    const labels = { today: 'Today', '7days': 'Last 7 days', '30days': 'Last 30 days' };
+    document.getElementById('page-subtitle').textContent = labels[_currentRange] + ' — ' +
+      new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+    document.getElementById('chart-subtitle').textContent = 'Daily expenses — ' + labels[_currentRange].toLowerCase();
+
+    ['metric-total', 'metric-approved', 'metric-pending', 'metric-top-cat'].forEach(id => {
+      document.getElementById(id).innerHTML = '<span class="spinner"></span>';
+    });
+
+    try {
+      _allExpenses = await db('expenses',
+        `?select=*&expense_date=gte.${start}&expense_date=lte.${end}&order=expense_date.desc,created_at.desc`
+      );
+
+      const total    = _allExpenses.reduce((s, e) => s + Number(e.amount), 0);
+      const approved = _allExpenses.filter(e => e.status === 'approved');
+      const pending  = _allExpenses.filter(e => e.status === 'pending');
+
+      const catTotals = {};
+      _allExpenses.forEach(e => { catTotals[e.category] = (catTotals[e.category] || 0) + Number(e.amount); });
+      const topCat = Object.entries(catTotals).sort((a, b) => b[1] - a[1])[0];
+
+      document.getElementById('metric-total').textContent       = fmt(total);
+      document.getElementById('metric-total-sub').textContent   = _allExpenses.length + ' item' + (_allExpenses.length !== 1 ? 's' : '');
+      document.getElementById('metric-approved').textContent    = approved.length;
+      document.getElementById('metric-approved-sub').textContent = fmt(approved.reduce((s, e) => s + Number(e.amount), 0));
+      document.getElementById('metric-pending').textContent     = pending.length;
+      document.getElementById('metric-pending-sub').textContent = pending.length ? fmt(pending.reduce((s, e) => s + Number(e.amount), 0)) + ' awaiting' : 'All clear';
+      document.getElementById('metric-top-cat').textContent     = topCat ? cap(topCat[0]) : '—';
+      document.getElementById('metric-top-cat-sub').textContent = topCat ? fmt(topCat[1]) : '';
+
+      renderCharts(days, _allExpenses);
+
+      // Populate branch dropdown once
+      if (document.getElementById('branch-filter').options.length === 1) {
+        _branches.forEach(b => {
+          document.getElementById('branch-filter')
+            .insertAdjacentHTML('beforeend', `<option value="${b.id}">${b.name}</option>`);
+        });
+      }
+
+      applyFilters();
+    } catch (e) {
+      showError('Could not load expenses. ' + e.message);
+      ['metric-total', 'metric-approved', 'metric-pending', 'metric-top-cat'].forEach(id => {
+        document.getElementById(id).textContent = '—';
+      });
+      document.getElementById('expenses-tbody').innerHTML =
+        '<tr class="loading-row"><td colspan="8">Failed to load data.</td></tr>';
+    }
+  }
+
+  async function approveExpense(id) {
+    try {
+      await dbUpdate('expenses', id, { status: 'approved', approved_by: 'Jerome' });
+      const e = _allExpenses.find(e => e.id === id);
+      if (e) e.status = 'approved';
+      applyFilters();
+    } catch (e) { showError('Approval failed: ' + e.message); }
+  }
+
+  async function rejectExpense(id) {
+    if (!confirm('Reject this expense?')) return;
+    try {
+      await dbUpdate('expenses', id, { status: 'rejected' });
+      const e = _allExpenses.find(e => e.id === id);
+      if (e) e.status = 'rejected';
+      applyFilters();
+    } catch (e) { showError('Rejection failed: ' + e.message); }
+  }
+
+  function openLogExpense() {
+    if (!_branches.length) { showError('Branches not loaded yet.'); return; }
+    const branchList = _branches.map((b, i) => `${i + 1}. ${b.name}`).join('\n');
+    const bIdx = parseInt(prompt('Select branch number:\n' + branchList)) - 1;
+    if (isNaN(bIdx) || !_branches[bIdx]) return;
+    const category    = prompt('Category:\nsupplies / utilities / maintenance / food / payroll / rent / other');
+    if (!category) return;
+    const description = prompt('Description:');
+    if (!description) return;
+    const amount      = parseFloat(prompt('Amount (₱):'));
+    if (isNaN(amount) || amount <= 0) return;
+    const submittedBy = prompt('Submitted by:') || 'Admin';
+    dbInsert('expenses', {
+      branch_id: _branches[bIdx].id, category: category.toLowerCase(),
+      description, amount, submitted_by: submittedBy, expense_date: todayStr(), status: 'pending'
+    })
+      .then(() => loadExpenses())
+      .catch(e => showError('Could not log expense: ' + e.message));
+  }
+
+  function exportCSV() {
+    if (!_allExpenses.length) { showError('No data to export.'); return; }
+    const rows = [['Date', 'Branch', 'Category', 'Description', 'Submitted By', 'Amount', 'Status']];
+    _allExpenses.forEach(e => {
+      rows.push([
+        e.expense_date, branchName(e.branch_id), e.category,
+        e.description, e.submitted_by || '', Number(e.amount).toFixed(2), e.status
+      ]);
+    });
+    const csv  = rows.map(r => r.map(v => `"${String(v).replace(/"/g, '""')}"`).join(',')).join('\n');
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url  = URL.createObjectURL(blob);
+    const a    = Object.assign(document.createElement('a'), { href: url, download: `expenses-${_currentRange}.csv` });
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  async function init() {
+    try {
+      _branches = await db('branches', '?select=id,name&order=name');
+    } catch (e) { /* non-fatal */ }
+    loadExpenses();
+  }
+
+  init();
+</script>
+<script src="lopez-wellness-nav.js"></script>
+<script>LWNav.init();</script>
+</body>
+</html>

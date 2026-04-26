@@ -27,9 +27,9 @@ const LWNav = (() => {
       label: "Operations",
       items: [
         { id: "branches",   label: "Branches",          icon: "🏢", file: "lopez-wellness-branches.html" },
-        { id: "therapists", label: "Therapists",        icon: "👤", file: "lopez-wellness-therapists.html",  comingSoon: true },
-        { id: "sales",      label: "Sales",             icon: "💰", file: "lopez-wellness-sales.html",       comingSoon: true },
-        { id: "expenses",   label: "Expenses",          icon: "📑", file: "lopez-wellness-expenses.html",    comingSoon: true },
+        { id: "therapists", label: "Therapists",        icon: "👤", file: "lopez-wellness-therapists.html" },
+        { id: "sales",      label: "Sales",             icon: "💰", file: "lopez-wellness-sales.html" },
+        { id: "expenses",   label: "Expenses",          icon: "📑", file: "lopez-wellness-expenses.html" },
       ]
     },
     {
